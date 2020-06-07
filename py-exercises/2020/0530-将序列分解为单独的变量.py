@@ -57,3 +57,20 @@ print(q)
 
 # bei
 print(s)
+
+
+"""
+分解一个字符串的过程
+"""
+
+s = 'Hello'
+a, b, c, d, e = s
+
+# H e l l o
+print(a, b, c, d, e)
+
+data = ['Acme', False, 99.99, (1, 2, 3), None, {'a': 11, 'b': 12}]
+_, _, _, tuples, _, dicts = data
+
+# (1, 2, 3) {'a': 11, 'b': 12}
+print(tuples, dicts)
