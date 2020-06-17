@@ -12,8 +12,8 @@ for reader_file in files:
     filename = os.path.basename(reader_file)
     print(filename)
     if first_file:
-        header = ['Number', 'Name', 'Age', 'School', 'Position', 'Salary']
-        data = pd.read_csv(reader_file, index_col=None, names=header)
+        headers = ['Number', 'Name', 'Age', 'School', 'Position', 'Salary']
+        data = pd.read_csv(reader_file, index_col=None, names=headers)
         # print(data)
         items.append(data)
         first_file = False
