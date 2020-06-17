@@ -1,5 +1,5 @@
 """
-> pip3 install xlrd xlwt
+> pip3 install xlrd xlwt openpyxl
 """
 import sys
 from datetime import date
