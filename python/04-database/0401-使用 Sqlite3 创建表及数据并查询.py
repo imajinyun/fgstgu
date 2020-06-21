@@ -2,7 +2,7 @@ import sqlite3
 
 connect = sqlite3.connect(':memory:')
 query = """
-CREATE TABLE students(
+CREATE TABLE employees(
     number VARCHAR(20),
     name VARCHAR(20),
     gender CHAR(1),
@@ -19,11 +19,11 @@ data = [
     ('1003', 'Lizhenyu', 'M', '499.0', '2016-08-23'),
     ('1004', 'Wangxing', 'F', '586.5', '2016-09-03'),
 ]
-statement = 'INSERT INTO students VALUES(?, ?, ?, ?, ?)'
+statement = 'INSERT INTO employees VALUES(?, ?, ?, ?, ?)'
 connect.executemany(statement, data)
 connect.commit()
 
-cursor = connect.execute('SELECT * FROM students')
+cursor = connect.execute('SELECT * FROM employees')
 rows = cursor.fetchall()
 
 counter = 0

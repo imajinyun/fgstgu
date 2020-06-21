@@ -3,10 +3,10 @@ import sys
 import sqlite3
 
 reader_file = sys.argv[1]
-connect = sqlite3.connect('students.db')
+connect = sqlite3.connect('employees.db')
 cursor = connect.cursor()
 create_table = """
-CREATE TABLE IF NOT EXISTS students(
+CREATE TABLE IF NOT EXISTS employees(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     number CHAR(4),
     name VARCHAR(20),
@@ -26,11 +26,14 @@ for row in reader:
     for col in range(len(header)):
         data.append(row[col])
     print(data)
-    cursor.execute('INSERT INTO students VALUES(NULL, ?, ?, ?, ?, ?, ?)', data)
+    cursor.execute(
+        'INSERT INTO employees VALUES(NULL, ?, ?, ?, ?, ?, ?)',
+        data
+    )
 connect.commit()
 print('')
 
-output = cursor.execute('SELECT * FROM students')
+output = cursor.execute('SELECT * FROM employees')
 rows = output.fetchall()
 for row in rows:
     output = []

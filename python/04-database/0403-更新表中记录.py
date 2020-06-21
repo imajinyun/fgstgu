@@ -5,7 +5,7 @@ import sqlite3
 reader_file = sys.argv[1]
 connect = sqlite3.connect(':memory:')
 query = """
-CREATE TABLE IF NOT EXISTS students(
+CREATE TABLE IF NOT EXISTS employees(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     number CHAR(4),
     name VARCHAR(20),
@@ -26,7 +26,7 @@ data = [
 ]
 for tup in data:
     print(tup)
-statement = "INSERT INTO students VALUES(NULL, ?, ?, ?, ?, ?, ?)"
+statement = "INSERT INTO employees VALUES(NULL, ?, ?, ?, ?, ?, ?)"
 connect.executemany(statement, data)
 connect.commit()
 print('-' * 80)
@@ -41,12 +41,12 @@ for row in reader:
             data.append(row[col])
     data.reverse()
     print(data)
-    sql = 'UPDATE students SET salary=?, school=? WHERE name=?;'
+    sql = 'UPDATE employees SET salary=?, school=? WHERE name=?;'
     connect.execute(sql, data)
 connect.commit()
 print('-' * 80)
 
-cursor = connect.execute('SELECT * FROM students')
+cursor = connect.execute('SELECT * FROM employees')
 rows = cursor.fetchall()
 for row in rows:
     output = []
