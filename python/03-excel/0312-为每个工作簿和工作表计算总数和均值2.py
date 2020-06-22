@@ -5,7 +5,6 @@ import pandas as pd
 
 path, writer_file = sys.argv[1], sys.argv[2]
 data = []
-first = True
 workbooks = glob.glob(os.path.join(path, '*.xlsx'))
 for workbook in workbooks:
     worksheets = pd.read_excel(workbook, sheet_name=None, index_col=None)
