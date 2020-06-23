@@ -1,0 +1,22 @@
+import matplotlib.pyplot as plt
+from numpy.random import randn
+plt.style.use('ggplot')
+
+a = randn(50).cumsum()
+b = randn(50).cumsum()
+c = randn(50).cumsum()
+d = randn(50).cumsum()
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+ax.plot(a, marker=r'o', color=u'blue', linestyle='-', label='Blue Solid')
+ax.plot(b, marker=r'+', color=u'red', linestyle='--', label='Red Dashed')
+ax.plot(c, marker=r'*', color=u'green', linestyle='-.', label='Green Dash Dot')
+ax.plot(d, marker=r's', color=u'orange', linestyle=':', label='Orange Dotted')
+ax.xaxis.set_ticks_position('bottom')
+ax.yaxis.set_ticks_position('left')
+ax.set_title('折线图')
+plt.xlabel('绘制')
+plt.ylabel('随机数')
+plt.legend(loc='best')
+# plt.savefig('a.png', dpi=400, bbox_inches='tight')
+plt.show()
