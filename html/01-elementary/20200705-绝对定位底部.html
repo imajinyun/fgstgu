@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    #wrap {
+      position: relative;
+      min-height: 100%;
+    }
+
+    #header {
+      background-color: aqua;
+      height: 100px;
+      width: 100%;
+    }
+
+    #content {
+      background-color: blueviolet;
+      padding-bottom: 100px;
+    }
+
+    #footer {
+      background-color: brown;
+      height: 100px;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="wrap">
+    <div id="header">Header</div>
+    <div id="content">Content</div>
+    <div id="footer">Footer</div>
+  </div>
+
+  <script>
+    let content = document.getElementById('content')
+    let string = ''
+    for (let i = 1; i <= 500; i++) {
+      string += '<p>Hello World #' + i + '</p>'
+    }
+    content.innerHTML = string
+  </script>
+</body>
+
+</html>
