@@ -60,8 +60,11 @@ var_dump($admin2->getClassLeader()->getName());
 
 $admin2->getClassLeader()->setName('Tom');
 
-// string(3) "Tom"
-var_dump($admin2->getClassLeader()->getName());
+/*
+string(4) "Jack"
+string(3) "Tom"
+*/
+var_dump($admin1->getClassLeader()->getName(), $admin2->getClassLeader()->getName());
 
 $admin2 = clone $admin1;
 $admin2->getClassLeader()->setName('Lucy');
