@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>检查浏览器是否支持某种类型的输入控件</h2>
+  <script>
+    function inputSupportedType(type) {
+      if (!document.createElement) {
+        return false;
+      }
+      var input = document.createElement('input');
+      input.setAttribute('type', type);
+      return !(input.type === 'text' && type !== 'text');
+    }
+
+    console.log(inputSupportedType('date'));
+    console.log(inputSupportedType('email'));
+    console.log(inputSupportedType('url'));
+    console.log(inputSupportedType('number'));
+    console.log(inputSupportedType('range'));
+  </script>
+</body>
+
+</html>

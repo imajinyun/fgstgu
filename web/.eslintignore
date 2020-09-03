@@ -1,0 +1,4 @@
+node_modules
+test/*
+doc/**/*.js
+!.eslintrc.js
