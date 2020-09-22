@@ -1,6 +1,6 @@
 """
 > pip3 install -U mysqlclient progressbar xlrd xlwt
-> python3 ./20200914-城市距离.py ./20200914城市距离.xlsx
+> python3 ./20200914-导入节点事件1.py ./20200914事件.xlsx
 """
 
 # coding=utf-8
@@ -47,25 +47,33 @@ def getWorksheetItems(file):
     with open_workbook(file) as book:
         sheet = book.sheet_by_index(0)
         items = []
-        for row in range(2, sheet.nrows):
+        cities = {}
+        for row in range(1, sheet.nrows):
             size = sheet.ncols
-            item = sheet.row_values(row, 0, size)
-            if item:
+            rows = sheet.row_values(row, 0, 3)
+            item = sheet.row_values(row, size - 2, size)
+            if row % 3 == 0:
+                cities[int(rows[1])] = int(rows[0])
+            if item[0] and int(item[0]) > 0:
                 items.append({
                     'map_id': 0,
-                    'city_id': int(item[0]),
+                    'city_id': 0,
+                    # 'country_id': rows[2].split('-')[0],
                     'target_id': int(item[0]),
                     'position': 0,
-                    'node_type': 3,
-                    'unlock_coupon_num': 0,
-                    'unlock_need_energy': int(item[4]),
-                    'run_need_energy': int(item[6]),
+                    'node_type': 2,
+                    'unlock_coins_num': 0,
+                    'unlock_need_energy': 0,
+                    'run_need_energy': int(item[1]),
                     'status': 1,
                     'create_user': '刘洋',
                     'update_user': '刘洋',
                     'created_at': at,
                     'updated_at': at
                 })
+    for item in items:
+        targetId = item['target_id']
+        item['city_id'] = cities[targetId]
     return items
 
 
@@ -161,11 +169,13 @@ if __name__ == "__main__":
         tuples = tuple(item.values())
         values.append(tuples)
 
+    # 插入节点事件
     sql = ''
     sql += 'INSERT INTO wx_walkup_node_483 '
-    sql += '(map_id,city_id,target_id,position,node_type,unlock_coupon_num,unlock_need_energy,run_need_energy,status,create_user,update_user,created_at,updated_at) VALUES '
+    sql += '(map_id,city_id,target_id,position,node_type,unlock_coins_num,unlock_need_energy,run_need_energy,status,create_user,update_user,created_at,updated_at) VALUES '
     sql += '(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
+    getMySQLConnect().cursor().execute('TRUNCATE TABLE wx_walkup_node_483')
     try:
         db = getMySQLConnect()
         cursor = db.cursor()
@@ -177,4 +187,5 @@ if __name__ == "__main__":
         exit(e)
     finally:
         cursor.close()
+        db.close()
     print('🎉 Successfully import node data to MySQL!')

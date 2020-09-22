@@ -102,16 +102,16 @@ if __name__ == "__main__":
     print('🚀 Visa data import starting...')
 
     maps = getMaps()
-    mapDict = {}
+    mapdict = {}
     for map in maps:
-        mapDict[map['name']] = map['id']
-    mapNames = list(mapDict)
+        mapdict[map['name']] = map['id']
+    mapnames = list(mapdict)
 
     countries = getCountries()
-    countryDict = {}
+    countrydict = {}
     for country in countries:
-        countryDict[country['name']] = country['id']
-    countryNames = list(countryDict)
+        countrydict[country['name']] = country['id']
+    countrynames = list(countrydict)
 
     getMySQLConnect().cursor().execute('TRUNCATE TABLE wx_walkup_visa_483')
     items = getWorksheetItems(sys.argv[1])
@@ -121,10 +121,10 @@ if __name__ == "__main__":
 
     values = []
     for key, item in enumerate(items):
-        if item['map_id'] in mapNames:
-            item['map_id'] = mapDict[item['map_id']]
-        if item['country_id'] in countryNames:
-            item['country_id'] = countryDict[item['country_id']]
+        if item['map_id'] in mapnames:
+            item['map_id'] = mapdict[item['map_id']]
+        if item['country_id'] in countrynames:
+            item['country_id'] = countrydict[item['country_id']]
         tuples = tuple(item.values())
         values.append(tuples)
 

@@ -1,6 +1,6 @@
 """
-> pip3 install -U mysqlclient progressbar xlrd xlwt
-> python3 ./20200914-组合节点.py ./20200914事件.xlsx
+> pip3 install -U mysqlclient progressbar dotenv xlrd xlwt
+> python3 ./20200914-导入节点签证3.py ./20200914城市距离.xlsx
 """
 
 # coding=utf-8
@@ -47,34 +47,25 @@ def getWorksheetItems(file):
     with open_workbook(file) as book:
         sheet = book.sheet_by_index(0)
         items = []
-        cities = {}
-        for row in range(1, sheet.nrows):
+        for row in range(2, sheet.nrows):
             size = sheet.ncols
-            rows = sheet.row_values(row, 0, 3)
-            item = sheet.row_values(row, size - 2, size)
-            if row % 3 == 0:
-                cities[int(rows[1])] = int(rows[0])
-            if item[0] and int(item[0]) > 0:
+            item = sheet.row_values(row, 0, size)
+            if item[2]:
                 items.append({
                     'map_id': 0,
-                    'city_id': 0,
-                    # 'country_id': rows[2].split('-')[0],
+                    'city_id': int(item[0]),
                     'target_id': int(item[0]),
                     'position': 0,
-                    'node_type': 2,
-                    'unlock_coupon_num': 0,
+                    'node_type': 1,
+                    'unlock_coins_num': int(item[2]),
                     'unlock_need_energy': 0,
-                    'run_need_energy': int(item[1]),
+                    'run_need_energy': int(item[7]),
                     'status': 1,
                     'create_user': '刘洋',
                     'update_user': '刘洋',
                     'created_at': at,
                     'updated_at': at
                 })
-    for item in items:
-        targetId = item['target_id']
-        # if targetId in cities.keys():
-        item['city_id'] = cities[targetId]
     return items
 
 
@@ -96,7 +87,7 @@ def getMaps():
 
 def getCities():
     cursor = getMySQLConnect().cursor()
-    cursor.execute('SELECT id AS city_id,map_id FROM wx_walkup_city_483')
+    cursor.execute('SELECT id AS city_id,map_id,country_id FROM wx_walkup_city_483')
     cities = getDictFetchAll(cursor)
     return cities
 
@@ -132,8 +123,10 @@ if __name__ == "__main__":
 
     cities = getCities()
     citydict = {}
+    countrydict = {}
     for city in cities:
         citydict[city['city_id']] = city['map_id']
+        countrydict[city['city_id']] = city['country_id']
     items = getWorksheetItems(sys.argv[1])
 
     if not items:
@@ -142,6 +135,7 @@ if __name__ == "__main__":
     values = []
     i = j = k = l = m = n = p = q = 0
     for item in items:
+        item['target_id'] = countrydict[item['city_id']]
         item['map_id'] = citydict[item['city_id']]
         if item['map_id'] == 1:
             i += 1
@@ -170,12 +164,12 @@ if __name__ == "__main__":
         tuples = tuple(item.values())
         values.append(tuples)
 
+    # 插入节点城市
     sql = ''
     sql += 'INSERT INTO wx_walkup_node_483 '
-    sql += '(map_id,city_id,target_id,position,node_type,unlock_coupon_num,unlock_need_energy,run_need_energy,status,create_user,update_user,created_at,updated_at) VALUES '
+    sql += '(map_id,city_id,target_id,position,node_type,unlock_coins_num,unlock_need_energy,run_need_energy,status,create_user,update_user,created_at,updated_at) VALUES '
     sql += '(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
-    getMySQLConnect().cursor().execute('TRUNCATE TABLE wx_walkup_node_483')
     try:
         db = getMySQLConnect()
         cursor = db.cursor()
