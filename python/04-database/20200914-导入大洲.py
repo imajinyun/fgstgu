@@ -11,6 +11,7 @@ import datetime
 import MySQLdb
 import traceback
 import time
+import re
 from tqdm import tqdm
 from dotenv import load_dotenv
 from datetime import date
@@ -43,10 +44,24 @@ def getDictFetchAll(cursor):
 
 
 def getMaps():
-    cursor = getMySQLConnect().cursor()
+    db = getMySQLConnect()
+    cursor = db.cursor()
     cursor.execute('SELECT id,name FROM wx_walkup_map_483')
     maps = getDictFetchAll(cursor)
+    cursor.close()
+    db.close()
     return maps
+
+
+def getCities(ids):
+    db = getMySQLConnect()
+    cursor = db.cursor()
+    sql = 'SELECT id AS city_id,map_id FROM wx_walkup_city_483 WHERE id IN(%s)'
+    cursor.execute(sql % ','.join(map(str, ids)))
+    cities = getDictFetchAll(cursor)
+    cursor.close()
+    db.close()
+    return cities
 
 
 def getCountries():
@@ -96,6 +111,22 @@ def getWorksheetItems(file, bar):
     return items
 
 
+def isNumber(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        pass
+
+    try:
+        import unicodedata
+        unicodedata.numeric(value)
+        return True
+    except (TypeError, ValueError):
+        pass
+    return False
+
+
 if __name__ == "__main__":
     print('🚀 Continent data import starting...')
 
@@ -116,8 +147,58 @@ if __name__ == "__main__":
         cursor.execute('SET NAMES utf8;')
         cursor.execute('SET character_set_connection=utf8;')
         cursor.execute('TRUNCATE TABLE wx_walkup_map_483')
-        bar.update(90)
         cursor.executemany(sql, items)
+        bar.update(85)
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        traceback.print_exc()
+        exit(e)
+    finally:
+        cursor.close()
+        db.close()
+
+    maps = getMaps()
+    mapdict = {}
+    for item in maps:
+        mapdict[item['id']] = item['name']
+
+    items = []
+    with open_workbook(sys.argv[2]) as book:
+        sheet = book.sheet_by_index(0)
+        for i in range(2, sheet.nrows):
+            row = sheet.row_values(i)
+            value = row[10]
+            if value and isNumber(value):
+                items.append({
+                    'city_id': int(row[0]),
+                    'total_energy': int(row[10])
+                })
+    cityids = [item['city_id'] for item in items]
+    cities = getCities(cityids)
+    citydict = {}
+    for city in cities:
+        citydict[city['city_id']] = city['map_id']
+
+    values = {}
+    for item in items:
+        if item['city_id'] in citydict.keys():
+            id = citydict[item['city_id']]
+            values[id] = item
+    column = ''
+    for value in values:
+        energy = values[value]['total_energy']
+        column += 'WHEN {} THEN {} '.format(value, energy)
+    sql = 'UPDATE wx_walkup_map_483 SET total_energy = CASE id %s END WHERE id IN(%s)' \
+        % (column, ','.join(map(str, values.keys())))
+
+    try:
+        db = getMySQLConnect()
+        cursor = db.cursor()
+        cursor.execute('SET NAMES utf8;')
+        cursor.execute('SET character_set_connection=utf8;')
+        cursor.execute(sql)
+        bar.update(95)
         db.commit()
     except Exception as e:
         db.rollback()
