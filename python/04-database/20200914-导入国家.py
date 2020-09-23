@@ -69,7 +69,7 @@ if __name__ == "__main__":
     countries = getCountries()
     bar = progressbar.ProgressBar(max_value=progressbar.UnknownLength)
     dt = datetime.datetime.now()
-    formattedAt = dt.strftime('%Y-%m-%d %H:%M:%S')
+    at = dt.strftime('%Y-%m-%d %H:%M:%S')
 
     getMySQLConnect().cursor().execute('TRUNCATE TABLE wx_walkup_country_483')
     for key, country in enumerate(countries):
@@ -82,16 +82,17 @@ if __name__ == "__main__":
         item['name'] = country['name']
         item['description'] = country['name']
         item['status'] = 1
-        item['created_at'] = formattedAt
-        item['updated_at'] = formattedAt
+        item['created_at'] = at
+        item['updated_at'] = at
 
         try:
             db = getMySQLConnect()
             cursor = db.cursor()
             cursor.execute('SET NAMES utf8;')
             cursor.execute('SET character_set_connection=utf8;')
-            sql = 'INSERT INTO wx_walkup_country_483(id, name,status,description,created_at,updated_at) VALUES(%s, %s, %s, %s, %s, %s)'
-            values = (item['id'], item['name'], item['status'], item['description'], item['created_at'], item['updated_at'])
+            sql = 'INSERT INTO wx_walkup_country_483(id,name,status,description,created_at,updated_at) VALUES(%s, %s, %s, %s, %s, %s)'
+            values = (item['id'], item['name'], item['status'],
+                      item['description'], item['created_at'], item['updated_at'])
             cursor.execute(sql, values)
             db.commit()
         except Exception as e:
