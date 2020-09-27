@@ -1,6 +1,6 @@
 """
 > pip3 install -U mysqlclient tqdm dotenv xlrd xlwt
-> python3 ./20200914-导入大洲.py ./20200914-大洲信息.xlsx
+> python3 ./20200914-导入大洲01.py ./20200914-大洲信息.xlsx ./20200914-城市距离.xlsx
 """
 
 # coding=utf-8

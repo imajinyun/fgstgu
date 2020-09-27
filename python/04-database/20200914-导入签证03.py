@@ -1,6 +1,6 @@
 """
 > pip3 install -U mysqlclient progressbar2 xlrd xlwt
-> python3 ./20200914-导入签证.py ./20200914签证.xlsx
+> python3 ./20200914-导入签证03.py ./20200914签证.xlsx
 """
 
 # coding=utf-8
@@ -113,9 +113,7 @@ if __name__ == "__main__":
         countrydict[country['name']] = country['id']
     countrynames = list(countrydict)
 
-    getMySQLConnect().cursor().execute('TRUNCATE TABLE wx_walkup_visa_483')
     items = getWorksheetItems(sys.argv[1])
-
     if not items:
         exit('🧨 Items is empty')
 
@@ -133,12 +131,12 @@ if __name__ == "__main__":
     sql += '(map_id,country_id,city_id,subject,options,status,answer,created_at,updated_at) VALUES '
     sql += '(%s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
-    getMySQLConnect().cursor().execute('TRUNCATE TABLE wx_walkup_visa_483')
     try:
         db = getMySQLConnect()
         cursor = db.cursor()
         cursor.execute('SET NAMES utf8;')
         cursor.execute('SET character_set_connection=utf8;')
+        cursor.execute('TRUNCATE TABLE wx_walkup_visa_483;')
         cursor.executemany(sql, values)
         db.commit()
     except Exception as e:

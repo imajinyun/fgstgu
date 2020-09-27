@@ -1,6 +1,6 @@
 """
 > pip3 install -U mysqlclient progressbar2 xlrd xlwt
-> python3 ./20200914-导入国家.py ./20200914签证.xlsx
+> python3 ./20200914-导入国家02.py ./20200914签证.xlsx
 """
 
 # coding=utf-8
@@ -9,8 +9,8 @@ import sys
 import json
 import datetime
 import MySQLdb
+import traceback
 import time
-import progressbar
 from dotenv import load_dotenv
 from datetime import date
 from xlrd import open_workbook, xldate_as_tuple
@@ -50,53 +50,54 @@ def getMaps():
 
 def getCountries():
     cursor = getMySQLConnect().cursor()
-    cursor.execute('SELECT id,cn_formatted_name FROM wx_walkup_city_483')
+    cursor.execute('SELECT id,en_name,cn_formatted_name FROM wx_walkup_city_483')
     cities = getDictFetchAll(cursor)
     countries = []
     if len(cities):
         exists = set()
-        for index, city in enumerate(cities):
-            name = city['cn_formatted_name'].split('·')[0]
+        for city in cities:
+            name = city['cn_formatted_name'].split('.')[0]
+            if city['en_name'] == 'Greater  Khingan':
+                countries.append({'name': '中华河山'})
+                break
             if name not in exists:
-                countries.append({'id': index + 1, 'name': name})
+                countries.append({'name': name})
             exists.add(name)
+    cursor.close()
     return countries
-
 
 if __name__ == "__main__":
     print('🚀 Country data import starting...')
 
     countries = getCountries()
-    bar = progressbar.ProgressBar(max_value=progressbar.UnknownLength)
     dt = datetime.datetime.now()
     at = dt.strftime('%Y-%m-%d %H:%M:%S')
 
-    getMySQLConnect().cursor().execute('TRUNCATE TABLE wx_walkup_country_483')
-    for key, country in enumerate(countries):
-        key += 1
-        time.sleep(0.01)
-        bar.update(key)
-
+    values = []
+    for index, country in enumerate(countries):
         item = {}
-        item['id'] = country['id']
+        item['id'] = index + 1
         item['name'] = country['name']
-        item['description'] = country['name']
         item['status'] = 1
+        item['description'] = country['name']
         item['created_at'] = at
         item['updated_at'] = at
+        values.append(tuple(item.values()))
 
-        try:
-            db = getMySQLConnect()
-            cursor = db.cursor()
-            cursor.execute('SET NAMES utf8;')
-            cursor.execute('SET character_set_connection=utf8;')
-            sql = 'INSERT INTO wx_walkup_country_483(id,name,status,description,created_at,updated_at) VALUES(%s, %s, %s, %s, %s, %s)'
-            values = (item['id'], item['name'], item['status'],
-                      item['description'], item['created_at'], item['updated_at'])
-            cursor.execute(sql, values)
-            db.commit()
-        except Exception as e:
-            db.rollback()
-            print(e)
-    db.close()
+    try:
+        db = getMySQLConnect()
+        cursor = db.cursor()
+        cursor.execute('SET NAMES utf8;')
+        cursor.execute('SET character_set_connection=utf8;')
+        cursor.execute('TRUNCATE TABLE wx_walkup_country_483')
+        sql = 'INSERT INTO wx_walkup_country_483(id,name,status,description,created_at,updated_at) VALUES (%s, %s, %s, %s, %s, %s)'
+        cursor.executemany(sql, values)
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        traceback.print_exc()
+        exit(e)
+    finally:
+        cursor.close()
+        db.close()
     print('🎉 Successfully import country data to MySQL!')

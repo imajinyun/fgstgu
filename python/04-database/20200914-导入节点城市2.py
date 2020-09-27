@@ -1,6 +1,6 @@
 """
-> pip3 install -U mysqlclient progressbar dotenv xlrd xlwt
-> python3 ./20200914-导入节点城市2.py ./20200914城市距离.xlsx
+> pip3 install -U mysqlclient dotenv xlrd xlwt
+> python3 ./20200914-导入节点城市2.py ./20200914-城市距离.xlsx
 """
 
 # coding=utf-8
@@ -11,7 +11,7 @@ import datetime
 import MySQLdb
 import time
 import traceback
-import progressbar
+import re
 from dotenv import load_dotenv
 from datetime import date
 from xlrd import open_workbook, xldate_as_tuple
@@ -41,12 +41,13 @@ def getMergedCellValue(sheet, value, row, col):
 
 
 def getWorksheetItems(file):
-    result = []
+    result = {}
     dt = datetime.datetime.now()
     at = dt.strftime('%Y-%m-%d %H:%M:%S')
     with open_workbook(file) as book:
         sheet = book.sheet_by_index(0)
         items = []
+        entry = []
         for row in range(2, sheet.nrows):
             size = sheet.ncols
             item = sheet.row_values(row, 0, size)
@@ -66,7 +67,11 @@ def getWorksheetItems(file):
                     'created_at': at,
                     'updated_at': at
                 })
-    return items
+            if item[9]:
+                entry.append({'city_id': int(item[0]), 'debris': True})
+        result['items'] = items
+        result['entry'] = entry
+    return result
 
 
 def getDictFetchAll(cursor):
@@ -85,9 +90,20 @@ def getMaps():
     return maps
 
 
-def getCities():
+def getCities(column: str):
     cursor = getMySQLConnect().cursor()
-    cursor.execute('SELECT id AS city_id,map_id FROM wx_walkup_city_483')
+    sql = 'SELECT %s FROM wx_walkup_city_483' % (column)
+    cursor.execute(sql)
+    cities = getDictFetchAll(cursor)
+    return cities
+
+
+def getCitiesByIds(column: str, ids: list):
+    ids = [item['city_id'] for item in entry]
+    cursor = getMySQLConnect().cursor()
+    sql = 'SELECT %s FROM wx_walkup_city_483 WHERE id IN %s' % (
+        column, tuple(ids))
+    cursor.execute(sql)
     cities = getDictFetchAll(cursor)
     return cities
 
@@ -121,13 +137,14 @@ if __name__ == "__main__":
     for map in maps:
         mapdict[map['id']] = map['name']
 
-    cities = getCities()
+    cities = getCities('id AS city_id,map_id')
     citydict = {}
     for city in cities:
         citydict[city['city_id']] = city['map_id']
-    items = getWorksheetItems(sys.argv[1])
 
-    if not items:
+    result = getWorksheetItems(sys.argv[1])
+    items, entry = result['items'], result['entry']
+    if not items or not entry:
         exit('🧨 Items is empty')
 
     values = []
@@ -158,19 +175,47 @@ if __name__ == "__main__":
         elif item['map_id'] == 8:
             q += 1
             item['position'] = q
-        tuples = tuple(item.values())
-        values.append(tuples)
+        values.append(tuple(item.values()))
 
     # 插入节点城市
     sql = ''
     sql += 'INSERT INTO wx_walkup_node_483 '
-    sql += '(map_id,city_id,target_id,position,node_type,unlock_coins_num,unlock_need_energy,run_need_energy,status,create_user,update_user,created_at,updated_at) VALUES '
+    sql += '(map_id,city_id,target_id,position,node_type,unlock_coins_num,unlock_need_energy,'
+    sql += 'run_need_energy,status,create_user,update_user,created_at,updated_at) VALUES '
     sql += '(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
     try:
         db = getMySQLConnect()
         cursor = db.cursor()
         cursor.executemany(sql, values)
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        traceback.print_exc()
+        exit(e)
+    finally:
+        cursor.close()
+        db.close()
+
+    db = getMySQLConnect()
+    cityids = [item['city_id'] for item in entry]
+    cities = getCitiesByIds('id AS city_id,extend', cityids)
+    column = ''
+    ids = []
+    for city in cities:
+        extend = city['extend']
+        if extend:
+            extend = json.loads(extend)
+            extend['description'] = re.sub('\s+', '', extend['description'])
+            extend['debris'] = True
+            extend = json.dumps(extend, ensure_ascii=False)
+            ids.append(str(city['city_id']))
+            column += "WHEN {} THEN '{}' ".format(city['city_id'], extend)
+    sql = 'UPDATE wx_walkup_city_483 SET extend = CASE id %s END WHERE id IN (%s)' \
+        % (column, ','.join(ids))
+    try:
+        cursor = db.cursor()
+        cursor.execute(sql)
         db.commit()
     except Exception as e:
         db.rollback()

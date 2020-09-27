@@ -1,6 +1,6 @@
 """
-> pip3 install -U mysqlclient progressbar dotenv xlrd xlwt
-> python3 ./20200914-导入节点签证3.py ./20200914城市距离.xlsx
+> pip3 install -U mysqlclient dotenv xlrd xlwt
+> python3 ./20200914-导入节点签证3.py ./20200914-城市距离.xlsx
 """
 
 # coding=utf-8
@@ -11,7 +11,6 @@ import datetime
 import MySQLdb
 import time
 import traceback
-import progressbar
 from dotenv import load_dotenv
 from datetime import date
 from xlrd import open_workbook, xldate_as_tuple
@@ -161,8 +160,7 @@ if __name__ == "__main__":
         elif item['map_id'] == 8:
             q += 1
             item['position'] = q
-        tuples = tuple(item.values())
-        values.append(tuples)
+        values.append(tuple(item.values()))
 
     # 插入节点城市
     sql = ''

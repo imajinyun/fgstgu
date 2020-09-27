@@ -175,10 +175,10 @@ if __name__ == "__main__":
     sql += '(map_id,city_id,target_id,position,node_type,unlock_coins_num,unlock_need_energy,run_need_energy,status,create_user,update_user,created_at,updated_at) VALUES '
     sql += '(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
-    getMySQLConnect().cursor().execute('TRUNCATE TABLE wx_walkup_node_483')
     try:
         db = getMySQLConnect()
         cursor = db.cursor()
+        cursor.execute('TRUNCATE TABLE wx_walkup_node_483')
         cursor.executemany(sql, values)
         db.commit()
     except Exception as e:
