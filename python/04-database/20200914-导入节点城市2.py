@@ -48,6 +48,7 @@ def getWorksheetItems(file):
         sheet = book.sheet_by_index(0)
         items = []
         entry = []
+        coins = []
         for row in range(2, sheet.nrows):
             size = sheet.ncols
             item = sheet.row_values(row, 0, size)
@@ -69,8 +70,10 @@ def getWorksheetItems(file):
                 })
             if item[9]:
                 entry.append({'city_id': int(item[0]), 'debris': True})
+            coins.append({'city_id': int(item[0]), 'coins': int(item[8])})
         result['items'] = items
         result['entry'] = entry
+        result['coins'] = coins
     return result
 
 
@@ -143,7 +146,7 @@ if __name__ == "__main__":
         citydict[city['city_id']] = city['map_id']
 
     result = getWorksheetItems(sys.argv[1])
-    items, entry = result['items'], result['entry']
+    items, entry, coins = result['items'], result['entry'], result['coins']
     if not items or not entry:
         exit('🧨 Items is empty')
 
@@ -197,9 +200,31 @@ if __name__ == "__main__":
         cursor.close()
         db.close()
 
-    db = getMySQLConnect()
     cityids = [item['city_id'] for item in entry]
     cities = getCitiesByIds('id AS city_id,extend', cityids)
+
+    # 更新城市奖励金币
+    column = ''
+    ids = []
+    for coin in coins:
+        column += "WHEN {} THEN {} ".format(str(coin['city_id']), str(coin['coins']))
+        ids.append(str(coin['city_id']))
+    sql = 'UPDATE wx_walkup_city_483 SET give_coin = CASE id %s END WHERE id IN (%s)' \
+        % (column, ','.join(ids))
+    try:
+        db = getMySQLConnect()
+        cursor = db.cursor()
+        cursor.execute(sql)
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        traceback.print_exc()
+        exit(e)
+    finally:
+        cursor.close()
+        db.close()
+
+    # 更新城市奖励碎片
     column = ''
     ids = []
     for city in cities:
@@ -214,6 +239,7 @@ if __name__ == "__main__":
     sql = 'UPDATE wx_walkup_city_483 SET extend = CASE id %s END WHERE id IN (%s)' \
         % (column, ','.join(ids))
     try:
+        db = getMySQLConnect()
         cursor = db.cursor()
         cursor.execute(sql)
         db.commit()
