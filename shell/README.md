@@ -1,1 +1,1 @@
-# shell-exercises
+# shell
