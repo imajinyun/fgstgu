@@ -102,6 +102,17 @@ def getCountries():
     return countries
 
 
+def getVisas():
+    cursor = getMySQLConnect().cursor()
+    sql = 'SELECT id,city_id FROM wx_walkup_visa_483 GROUP BY country_id ORDER BY id ASC'
+    cursor.execute(sql)
+    entities = getDictFetchAll(cursor)
+    visas = {}
+    if len(entities):
+        for entity in entities:
+            visas[entity['city_id']] = entity['id']
+    return visas
+
 def getChinaProvinces():
     return [
         '北京', '天津', '河北', '山西', '内蒙古', '辽宁',
@@ -120,6 +131,7 @@ if __name__ == "__main__":
     for map in maps:
         mapdict[map['id']] = map['name']
 
+    visas = getVisas()
     cities = getCities()
     citydict = {}
     countrydict = {}
@@ -134,7 +146,11 @@ if __name__ == "__main__":
     values = []
     i = j = k = l = m = n = p = q = 0
     for item in items:
-        item['target_id'] = countrydict[item['city_id']]
+        # item['target_id'] = visas[item['city_id']]
+        if item['city_id'] in visas.keys():
+            item['target_id'] = visas[item['city_id']]
+        else:
+            item['target_id'] = 0
         item['map_id'] = citydict[item['city_id']]
         if item['map_id'] == 1:
             i += 1
