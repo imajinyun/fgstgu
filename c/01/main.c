@@ -24,7 +24,7 @@ typedef struct student_score score_t;
 // 是否调试
 #define DEBUG 1
 
-// 控制每每行 80 个字符
+// 控制每行 80 个字符
 #define LINE_LENGTH 80
 
 int n; // n 统计输入的学员人数
@@ -818,6 +818,7 @@ int main(int argc, char *argv[]) {
         break;
       case 0: // 退出学生成绩管理系统
         exit(0);
+        break;
       default:
         printf("⚠️你的输入有误，请检查后重试！\n");
         break;
