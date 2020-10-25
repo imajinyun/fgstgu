@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./ext/lib"
+	"./lib"
 	"flag"
 )
 
