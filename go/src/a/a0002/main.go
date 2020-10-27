@@ -1,17 +1,16 @@
 package main
 
 import (
-	"./ext/lib"
+	"a/a0002/lib"
 	"flag"
 )
 
 var name string
 
 func init() {
-	flag.StringVar(&name, "name", "Guest", "The greeting object.")
+	flag.StringVar(&name, "name", "Guest", "Hello World!")
 }
 
-// go run main.go -name=World
 func main() {
 	flag.Parse()
 	lib.Hello(name)
