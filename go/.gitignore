@@ -36,6 +36,10 @@ Session.vim
 # cscope-related files
 cscope.*
 
+# Go files
+bin/
+pkg/
+
 # Go test binaries
 *.test
 /hack/.test-cmd-auth
