@@ -7,6 +7,7 @@ import (
 var a int = 100
 var b int = 200
 
+// 全局变量和局部变量
 func main() {
 	a, b, c := 10, 20, 0
 	fmt.Printf("a = %d, b = %d, c = %d\n", a, b, c)
