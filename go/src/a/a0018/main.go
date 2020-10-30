@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// 可变参数
 func main() {
 	sum, avg, cnt := score(90, 85.5, 70, 66, 77, 65.5)
 	fmt.Printf("cnt = %d, sum = %.2f, avg = %.2f\n", cnt, sum, avg)
