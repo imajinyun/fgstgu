@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// goto 语句
 func main() {
 	var i, j int
 	i = 1
