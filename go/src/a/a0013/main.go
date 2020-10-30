@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// 函数调用
+// 函数变量
 func main() {
 	a := strToCase("ABCDEFGHIJKLMNOPQRSTUVWXYZ", toLower)
 	fmt.Printf("String to lower: %s\n", a)
