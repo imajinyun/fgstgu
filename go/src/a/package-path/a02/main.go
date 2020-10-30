@@ -1,7 +1,7 @@
 package main
 
 import (
-	"a/a0002/lib"
+	"a/package-path/a02/lib"
 	"flag"
 )
 
@@ -11,6 +11,7 @@ func init() {
 	flag.StringVar(&name, "name", "Guest", "Hello World!")
 }
 
+// go run main.go -name=World
 func main() {
 	flag.Parse()
 	lib.Hello(name)

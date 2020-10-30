@@ -1,10 +1,10 @@
 package main
 
 import (
-	"a/a0003/lib"
+	"a/package-path/a03/lib"
 
-	// use of internal package a/a0003/lib/internal not allowed
-	// in "a/a0003/lib/internal"
+	// use of internal package a/package-path/a03/lib/internal not allowed
+	in "a/package-path/a03/lib/internal"
 	"flag"
 )
 
