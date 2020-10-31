@@ -22,6 +22,6 @@ func counter() func() int {
 		i++
 		return i
 	}
-	fmt.Println("counter inner func: ", res)
+	fmt.Printf("counter inner func: %p\n", res)
 	return res
 }
