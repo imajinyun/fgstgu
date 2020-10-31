@@ -25,7 +25,7 @@ var indexTests = []IndexTest{
 	{"foo", "", 0},
 	{"foo", "o", 1},
 	{"abcABCabc", "A", 3},
-	{"abcdef"[:2], "de", 3},
+	{"abcdef"[1:], "de", 2},
 }
 
 var lastIndexTests = []IndexTest{
@@ -99,6 +99,45 @@ func TestLastIndex(t *testing.T) { runIndexTests(t, strings.LastIndex, "LastInde
 func TestIndexAny(t *testing.T)  { runIndexTests(t, strings.IndexAny, "IndexAny", indexAnyTests) }
 func TestLastIndexAny(t *testing.T) {
 	runIndexTests(t, strings.LastIndexAny, "LastIndexAny", lastIndexAnyTests)
+}
+
+func TestIndexByte(t *testing.T) {
+	for _, tt := range indexTests {
+		if len(tt.sep) != 1 {
+			continue
+		}
+		pos := strings.IndexByte(tt.s, tt.sep[0])
+		t.Log(tt.s, tt.sep, tt.out, pos)
+		if pos != tt.out {
+			t.Errorf("IndexByte(\"%q\", \"%q\") = %v; want %v",
+				tt.s, tt.sep[0], pos, tt.out)
+		}
+	}
+}
+
+func TestRune(t *testing.T) {
+	runes := []struct {
+		in   string
+		rune rune
+		want int
+	}{
+		{"", 'a', -1},
+		{"", '☺', -1},
+		{"foo", '☹', -1},
+		{"foo", 'o', 1},
+		{"foo☺bar", '☺', 3},
+		{"foo☺☻☹bar", '☹', 9},
+		{"a A x", 'A', 2},
+		{"some_text=some_value", '=', 9},
+		{"☺a", 'a', 3},
+		{"a☻☺b", '☺', 4},
+	}
+	for _, tt := range runes {
+		if got := strings.IndexRune(tt.in, tt.rune); got != tt.want {
+			t.Errorf("IndexRune(%q, %q) = %v; want %v",
+				tt.in, tt.rune, got, tt.want)
+		}
+	}
 }
 
 var ContainsTests = []struct {
