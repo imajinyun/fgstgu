@@ -25,4 +25,15 @@ func main() {
 	} else {
 		fmt.Println("Not found")
 	}
+
+	var key string = "Japan"
+	if _, ok := countries[key]; ok {
+		delete(countries, key)
+	}
+	fmt.Println(countries)
+
+	// Clear map
+	// countries = map[string]string{}
+	countries = make(map[string]string)
+	fmt.Println(countries)
 }
