@@ -11,10 +11,10 @@ type StringTest struct {
 }
 
 func runStringTests(t *testing.T, f func(string) string, name string, cases []StringTest) {
-	for _, test := range cases {
-		actual := f(test.in)
-		if actual != test.out {
-			t.Errorf("%s(%q) = %q, want %q", name, test.in, actual, test.out)
+	for _, v := range cases {
+		actual := f(v.in)
+		if actual != v.out {
+			t.Errorf("%s(%q) = %q, want %q", name, v.in, actual, v.out)
 		}
 	}
 }
