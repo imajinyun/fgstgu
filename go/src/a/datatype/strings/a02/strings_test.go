@@ -1,4 +1,4 @@
-package a02_test
+package a02
 
 import (
 	"strings"
