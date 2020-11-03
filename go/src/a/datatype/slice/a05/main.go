@@ -26,4 +26,12 @@ func main() {
 	fmt.Println("d is nil: ", d == nil)
 	fmt.Println("e is nil: ", e == nil)
 	fmt.Printf("d = %#v, e = %#v\n", d, e)
+
+	/**
+	 * In practice, nil slices and empty slices can often be treated in the same way:
+	 *
+	 * - they have zero length and capacity.
+	 * - they can be used with the same effect in for loops and append functions.
+	 * - and they even look the same when printed.
+	 */
 }
