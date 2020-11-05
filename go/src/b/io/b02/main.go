@@ -6,19 +6,19 @@ import (
 )
 
 func main() {
-	filename := "/tmp/test"
-	err := os.Mkdir(filename, os.ModePerm)
+	name := "/tmp/test"
+	err := os.Mkdir(name, os.ModePerm)
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
-		fmt.Printf("Directory %s created successfully!\n", filename)
+		fmt.Printf("Directory %s created successfully!\n", name)
 	}
 
-	filename = "/tmp/a/b/c/d/test"
-	err = os.MkdirAll(filename, os.ModePerm)
+	name = "/tmp/a/b/c/d/test"
+	err = os.MkdirAll(name, os.ModePerm)
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
-		fmt.Printf("Directory %s created successfully!\n", filename)
+		fmt.Printf("Directory %s created successfully!\n", name)
 	}
 }
