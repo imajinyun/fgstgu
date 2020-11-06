@@ -6,5 +6,12 @@ import (
 )
 
 func main() {
-	log.Println(http.ListenAndServe("127.0.0.1:8080", nil))
+	fileServer()
+}
+
+func fileServer() {
+	root, port := http.Dir("./src/"), ":8080"
+	log.Printf(" File server root path is %s\n", root)
+	log.Printf(" Please click http://127.0.0.1%s to access it\n", port)
+	http.ListenAndServe(port, http.FileServer(root))
 }
