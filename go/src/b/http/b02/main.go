@@ -2,18 +2,19 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
 )
 
 func main() {
-	sendHttpRequest()
+	sendGetRequest()
 }
 
-func sendHttpRequest() {
+func sendGetRequest() {
 	url := "https://gate.lagou.com/v1/entry/privacyPolicy/query"
 	client := http.Client{}
 	request, err := http.NewRequest("GET", url, nil)
-	check(err)
+	checkError(err)
 	cookie := &http.Cookie{Name: "username", Value: "Peter"}
 	request.AddCookie(cookie)
 	response, err := client.Do(request)
@@ -23,17 +24,20 @@ func sendHttpRequest() {
 	fmt.Printf("Response status code: %v\n", response.StatusCode)
 
 	if response.StatusCode == 200 {
-		fmt.Println("Request successfully!")
-		check(err)
+		data, err := ioutil.ReadAll(response.Body)
+		fmt.Println("✔️ Request successfully!")
+		checkError(err)
+		fmt.Println("✔️ Results:")
+		fmt.Println(string(data))
 	} else {
-		fmt.Println("Request failed!")
+		fmt.Println("✖️ Request failed!")
 	}
 }
 
-func check(err error) {
+func checkError(err error) {
 	defer func() {
-		if ins, ok := recover().(error); ok {
-			fmt.Println("An exception has occurred: ", ins.Error())
+		if res, ok := recover().(error); ok {
+			fmt.Println("✖️ An exception has occurred: ", res.Error())
 		}
 	}()
 	if err != nil {
