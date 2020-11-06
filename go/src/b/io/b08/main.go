@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -14,7 +15,7 @@ func main() {
 	for {
 		str, err := reader.ReadString('\n')
 		fmt.Print(str)
-		if err != nil {
+		if err == io.EOF {
 			fmt.Println("Read finished!")
 			break
 		}
