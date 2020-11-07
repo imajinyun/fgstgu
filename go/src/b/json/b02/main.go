@@ -19,6 +19,10 @@ func main() {
 		{"error", `Panic: An error occurred`, "/path/to/src/acme/util.go", 123},
 	}
 
+	if data, err := json.Marshal(info); err == nil {
+		fmt.Printf("%s\n", data)
+	}
+
 	if data, err := json.MarshalIndent(info, "", "  "); err == nil {
 		fmt.Printf("%s\n", data)
 	}
