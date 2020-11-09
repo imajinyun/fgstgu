@@ -10,6 +10,7 @@ import (
 	"os"
 )
 
+// 生成 RSA 密钥文件
 func main() {
 	var bits int
 	flag.IntVar(&bits, "b", 1024, "Key length, default is 1024 bits")
