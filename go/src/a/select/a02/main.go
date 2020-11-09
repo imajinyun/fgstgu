@@ -9,10 +9,12 @@ func main() {
 	a := make(chan int)
 	b := make(chan int)
 	go func() {
+		time.Sleep(10 * time.Millisecond)
 		data := <-a
 		fmt.Println("a channel data: ", data)
 	}()
 	go func() {
+		time.Sleep(3 * time.Second)
 		data := <-b
 		fmt.Println("b channel data: ", data)
 	}()
