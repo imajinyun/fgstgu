@@ -57,4 +57,15 @@ func main() {
 	for _, v := range heros {
 		fmt.Printf("%+v\n", v)
 	}
+	fmt.Println()
+
+	sort.Slice(heros, func(i, j int) bool {
+		if heros[i].Cate != heros[j].Cate {
+			return heros[i].Cate < heros[j].Cate
+		}
+		return heros[i].Name < heros[j].Name
+	})
+	for _, v := range heros {
+		fmt.Printf("%+v\n", v)
+	}
 }
