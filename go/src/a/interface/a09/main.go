@@ -47,6 +47,8 @@ func (js *JumpState) CanTransitTo(name string) bool {
 	return name != "MoveState"
 }
 
+// 有限状态机实现
+// go run src/a/interface/a09/{info.go,manager.go,state.go} src/a/interface/a09/main.go
 func main() {
 	sm := NewStateManager()
 	sm.OnChange = func(from, to State) {
