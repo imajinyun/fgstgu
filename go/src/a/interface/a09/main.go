@@ -47,8 +47,17 @@ func (js *JumpState) CanTransitTo(name string) bool {
 	return name != "MoveState"
 }
 
-// 有限状态机实现
-// go run src/a/interface/a09/{info.go,manager.go,state.go} src/a/interface/a09/main.go
+/**
+ * 有限状态机实现
+ *
+ * 第一种方式：
+ * -> go run src/a/interface/a09/{info.go,manager.go,state.go} src/a/interface/a09/main.go
+ *
+ * 第二种方式：
+ * -> export GOPATH=$HOME/path/to/go/
+ * -> go install a/interface/a09
+ * -> a09
+ */
 func main() {
 	sm := NewStateManager()
 	sm.OnChange = func(from, to State) {
