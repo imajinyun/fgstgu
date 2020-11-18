@@ -5,6 +5,7 @@ import (
 	"reflect"
 )
 
+// 使用反射获取结构体的成员类型
 func main() {
 	type cat struct {
 		Name string
