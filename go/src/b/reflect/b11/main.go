@@ -5,6 +5,12 @@ import (
 	"reflect"
 )
 
+/**
+ * -> cd /path/to/go
+ * -> export GOPATH=/path/to/go/
+ * -> go build -o main a/package-path/a02
+ * -> ./main
+ */
 func main() {
 	caller := reflect.ValueOf(add)
 	params := []reflect.Value{
