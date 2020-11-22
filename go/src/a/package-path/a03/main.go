@@ -4,7 +4,7 @@ import (
 	"a/package-path/a03/lib"
 
 	// use of internal package a/package-path/a03/lib/internal not allowed
-	in "a/package-path/a03/lib/internal"
+	// in "a/package-path/a03/lib/internal"
 	"flag"
 )
 
