@@ -2,7 +2,6 @@ package main
 
 import (
 	"a/package-path/a03/lib"
-
 	// use of internal package a/package-path/a03/lib/internal not allowed
 	// in "a/package-path/a03/lib/internal"
 	"flag"
@@ -16,6 +15,6 @@ func init() {
 
 func main() {
 	flag.Parse()
-	lib.Hello(name)
+	lib.Hello()
 	// in.Hello(name)
 }
