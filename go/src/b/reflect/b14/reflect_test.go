@@ -48,8 +48,8 @@ func fillBySettings(p interface{}, settings map[string]interface{}) error {
 			continue
 		}
 		if field.Type == reflect.TypeOf(v) {
-			value := reflect.ValueOf(p)
-			elem := value.Elem()
+			valueOf := reflect.ValueOf(p)
+			elem := valueOf.Elem()
 			elem.FieldByName(k).Set(reflect.ValueOf(v))
 		}
 	}
