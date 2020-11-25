@@ -22,6 +22,8 @@ func TestBasicType(t *testing.T) {
 	var b1, b2 bool = false, true
 	var array = [3]int{}
 	var slice = []int{}
+	ch := make(chan string)
+	var emptyInterface interface{} = make(map[string]int)
 	t.Log(CheckType(a))
 	t.Log(CheckType(b))
 	t.Log(CheckType(c))
@@ -31,9 +33,12 @@ func TestBasicType(t *testing.T) {
 	t.Log(CheckType(b1))
 	t.Log(CheckType(b2))
 	t.Log(CheckType(array))
-	t.Log(CheckType(slice))
-	t.Log(CheckType(struct{}{}))
 	t.Log(CheckType(make(map[string]int)))
+	t.Log(CheckType(slice))
+	t.Log(CheckType(ch))
+	t.Log(CheckType(struct{}{}))
+	t.Log(CheckType(emptyInterface))
+	t.Log(CheckType(func() {}))
 }
 
 func TestDeepEqual(t *testing.T) {
@@ -96,8 +101,18 @@ func CheckType(v interface{}) (s string) {
 		s = "Boolean"
 	case reflect.Array:
 		s = "Array"
+	case reflect.Map:
+		s = "Map"
 	case reflect.Slice:
 		s = "Slice"
+	case reflect.Chan:
+		s = "Chan"
+	case reflect.Func:
+		s = "Func"
+	case reflect.Interface:
+		s = "Interface"
+	case reflect.Struct:
+		s = "Struct"
 	default:
 		s = "Unknown"
 	}
