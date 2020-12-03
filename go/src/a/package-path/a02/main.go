@@ -1,7 +1,7 @@
 package main
 
 import (
-	"a/package-path/a02/lib"
+	"a/package-path/a03/lib"
 	"flag"
 )
 
@@ -12,11 +12,10 @@ func init() {
 }
 
 /**
- * -> cd /path/to/go
- * -> export GOPATH=/path/to/go/
- * -> cd ./src
- * -> go build -o main a/package-path/a02
- * -> ./main
+ * -> cd src
+ * -> export GOPATH=/Users/tal/Codes/fgstgu/go:$GOPAT
+ * -> go install a/package-path/a02/lib
+ * -> go run a/package-path/a02/main.go -name=World
  */
 func main() {
 	flag.Parse()

@@ -11,9 +11,9 @@ func init() {
 /**
  * -> go run main.go main_lib.go -name=World
  * or
- * -> cd /path/to/go/a/package-path/a01
+ * -> cd /path/to/fgstgu/go/src/a/package-path/a01
  * -> go build -o main
- * -> ./main
+ * -> ./main -name=World
  */
 func main() {
 	flag.Parse()
