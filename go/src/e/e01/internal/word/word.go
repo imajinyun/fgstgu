@@ -28,8 +28,8 @@ func UnderscoreToLowerCamelCase(s string) string {
 	return string(unicode.ToLower(rune(s[0]))) + s[1:]
 }
 
-// CamelCaseToUnderscore func.
-func CamelCaseToUnderscore(s string) string {
+// ToSnakeCase func.
+func ToSnakeCase(s string) string {
 	var output []rune
 	for i, r := range s {
 		if i == 0 {

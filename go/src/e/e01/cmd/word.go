@@ -13,7 +13,7 @@ const (
 	ModeToLower
 	ModeUnderscoreToUpperCamelCase
 	ModeUnderscoreToLowerCamelCase
-	ModeCamelCaseToUnderscore
+	ModeWordToSnakeCase
 )
 
 var str string
@@ -24,7 +24,7 @@ var desc = strings.Join([]string{
 	"2. Word to lower case",
 	"3. Underscore word to upper camel case",
 	"4. Underscore word to lower camel case",
-	"5. Camel case to underscore",
+	"5. Convert a word to snake case",
 }, "\n")
 var wordCmd = &cobra.Command{
 	Use:   "word",
@@ -41,8 +41,8 @@ var wordCmd = &cobra.Command{
 			content = word.UnderscoreToUpperCamelCase(str)
 		case ModeUnderscoreToLowerCamelCase:
 			content = word.UnderscoreToLowerCamelCase(str)
-		case ModeCamelCaseToUnderscore:
-			content = word.CamelCaseToUnderscore(str)
+		case ModeWordToSnakeCase:
+			content = word.ToSnakeCase(str)
 		default:
 			log.Fatalf("\nNot supported mode, please see [help word] documentation")
 		}
