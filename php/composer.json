@@ -1,0 +1,15 @@
+{
+  "name": "fgstgu/php",
+  "description": "This is an example for PHP",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "imajinyun",
+      "email": "imajinyun@gmail.com"
+    }
+  ],
+  "require": {
+    "laravel/helpers": "^1.4",
+    "symfony/var-dumper": "^5.2"
+  }
+}

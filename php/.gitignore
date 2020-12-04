@@ -1,0 +1,10 @@
+/.vscode
+/.idea
+/vendor
+
+.php_cs.cache
+.phpstorm.meta.php
+.phpunit.result.cache
+
+composer.lock
+composer.phar
