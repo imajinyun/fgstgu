@@ -8,6 +8,11 @@
       "email": "imajinyun@gmail.com"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
   "require": {
     "laravel/helpers": "^1.4",
     "symfony/var-dumper": "^5.2"
