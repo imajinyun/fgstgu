@@ -1,0 +1,6 @@
+.vscode/
+test-results/
+tmp/
+routes/
+target/*
+none
