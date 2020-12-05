@@ -5,9 +5,11 @@ import (
 	"strings"
 
 	"e/e01/internal/word"
+
 	"github.com/spf13/cobra"
 )
 
+// Convert mode.
 const (
 	ModeToUpper = iota + 1
 	ModeToLower

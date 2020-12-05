@@ -14,5 +14,6 @@ func GetCalculateTime(t time.Time, d string) (time.Time, error) {
 	if err != nil {
 		return time.Time{}, err
 	}
+
 	return t.Add(duration), nil
 }

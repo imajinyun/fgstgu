@@ -17,7 +17,7 @@ var timeCmd = &cobra.Command{
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 
-var notTimeCmd = &cobra.Command{
+var nowTimeCmd = &cobra.Command{
 	Use:   "now",
 	Short: "Get current time",
 	Long:  "Get current time",
@@ -37,11 +37,11 @@ var calcTimeCmd = &cobra.Command{
 	Long:  "Calculate need time",
 	Run: func(cmd *cobra.Command, args []string) {
 		var currTime time.Time
-		var layout = "2016-01-02 15:04:05"
+		var layout = "2006-01-02 15:04:05"
 		if calcTime == "" {
-			currTime = timer.GetNowTime()ss
+			currTime = timer.GetNowTime()
 		} else {
-			var err errors
+			var err error
 			space := strings.Count(calcTime, " ")
 			if space == 0 {
 				layout = "2016-01-02"
@@ -55,9 +55,9 @@ var calcTimeCmd = &cobra.Command{
 				currTime = time.Unix(int64(t), 0)
 			}
 		}
-		t, err := time.GetCalculateTimer(currTime, duration)
+		t, err := timer.GetCalculateTime(currTime, duration)
 		if err != nil {
-			log.Fatalf("timer.GetCalculateTimer: %v", err)
+			log.Fatalf("timer.GetCalculateTime: %v", err)
 		}
 		log.Printf("\nOutput: %s, %d", t.Format(layout), t.Unix())
 	},
