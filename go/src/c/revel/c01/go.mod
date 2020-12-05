@@ -7,6 +7,7 @@ require (
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/garyburd/redigo v1.6.2 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
+	github.com/google/pprof v0.0.0-20201203190320-1bf35d6f28c2 // indirect
 	github.com/inconshreveable/log15 v0.0.0-20201112154412-8562bdadbbac // indirect
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
@@ -18,6 +19,7 @@ require (
 	github.com/twinj/uuid v1.0.0 // indirect
 	github.com/xeonx/timeago v1.0.0-rc4 // indirect
 	golang.org/x/net v0.0.0-20201202161906-c7110b5ffcbb // indirect
+	golang.org/x/sys v0.0.0-20201204225414-ed752295db88 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/stack.v0 v0.0.0-20141108040640-9b43fcefddd0 // indirect
 )
