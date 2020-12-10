@@ -1,3 +1,5 @@
+// [Run strikingly fast parallel file searches in Go with sync.ErrGroup](https://www.oreilly.com/content/run-strikingly-fast-parallel-file-searches-in-go-with-sync-errgroup/)
+
 package main
 
 import (
