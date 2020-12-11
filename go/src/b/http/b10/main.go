@@ -255,11 +255,11 @@ func main() {
 
 		ctx, cancel := context.WithTimeout(context.Background(), 1500*time.Millisecond)
 		start := time.Now()
-		rsp, err := tc.fn(ctx, 0)
+		ret, err := tc.fn(ctx, 0)
 		if err != nil {
 			log.Fatalf("error: %s", err)
 		} else {
-			log.Printf("finished in %s: %s", time.Since(start), joinString(rsp))
+			log.Printf("finished in %s: %s", time.Since(start), joinString(ret))
 		}
 		log.Println()
 		cancel()
