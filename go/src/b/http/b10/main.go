@@ -203,6 +203,7 @@ func GetFriendsSelects(ctx context.Context, user int64) (map[string]*User, error
 		}
 	})
 
+	// Map
 	friends := make(chan *User)
 	workers := int32(nWorkers)
 	for i := 0; i < nWorkers; i++ {
@@ -227,6 +228,7 @@ func GetFriendsSelects(ctx context.Context, user int64) (map[string]*User, error
 		})
 	}
 
+	// Reduce
 	ret := map[string]*User{}
 	g.Go(func() error {
 		for friend := range friends {
@@ -234,6 +236,7 @@ func GetFriendsSelects(ctx context.Context, user int64) (map[string]*User, error
 		}
 		return nil
 	})
+	// Return the final result, and the error result from the subtask group.
 	return ret, g.Wait()
 }
 
