@@ -2,35 +2,27 @@ package c01
 
 import "sync"
 
-// RWLockMap struct.
-type RWLockMap struct {
-	m    map[interface{}]interface{}
-	lock sync.RWMutex
+// SyncMapBenchmarkAdapter struct.
+type SyncMapBenchmarkAdapter struct {
+	m sync.Map
 }
 
-// Get method for RWLockMap.
-func (m *RWLockMap) Get(key interface{}) (interface{}, bool) {
-	m.lock.RLock()
-	v, ok := m.m[key]
-	m.lock.RUnlock()
-	return v, ok
+// Set method for SyncMapBenchmarkAdapter.
+func (s *SyncMapBenchmarkAdapter) Set(key, value interface{}) {
+	s.m.Store(key, value)
 }
 
-// Set method for RWLockMap.
-func (m *RWLockMap) Set(key, value interface{}) {
-	m.lock.Lock()
-	m.m[key] = value
-	m.lock.Unlock()
+// Get method for SyncMapBenchmarkAdapter.
+func (s *SyncMapBenchmarkAdapter) Get(key interface{}) (interface{}, bool) {
+	return s.m.Load(key)
 }
 
-// Del method for RWLockMap.
-func (m *RWLockMap) Del(key interface{}) {
-	m.lock.Lock()
-	delete(m.m, key)
-	m.lock.Unlock()
+// Del method for SyncMapBenchmarkAdapter.
+func (s *SyncMapBenchmarkAdapter) Del(key interface{}) {
+	s.m.Delete(key)
 }
 
-// CreateRWLockMap func.
-func CreateRWLockMap() *RWLockMap {
-	return &RWLockMap{m: make(map[interface{}]interface{}, 0)}
+// CreateSyncMapBenchmarkAdapter func.
+func CreateSyncMapBenchmarkAdapter() *SyncMapBenchmarkAdapter {
+	return &SyncMapBenchmarkAdapter{}
 }
