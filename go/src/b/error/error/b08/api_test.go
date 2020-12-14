@@ -57,7 +57,7 @@ func TestServeError(t *testing.T) {
 	assert.Equal(t, `{"code":500,"message":"server internal error"}`, recorder.Body.String())
 
 	compositeErr := &CompositeError{
-		Errors: []error {
+		Errors: []error{
 			fmt.Errorf("first error"),
 			fmt.Errorf("another error"),
 		},
@@ -69,7 +69,7 @@ func TestServeError(t *testing.T) {
 	assert.Equal(t, `{"code":500,"message":"first error"}`, recorder.Body.String())
 
 	compositeErr = &CompositeError{
-		Errors: []error {
+		Errors: []error{
 			New(600, "myApiError"),
 			New(601, "MyOtherApiError"),
 		},
@@ -81,9 +81,9 @@ func TestServeError(t *testing.T) {
 	assert.Equal(t, `{"code":600,"message":"myApiError"}`, recorder.Body.String())
 
 	compositeErr = &CompositeError{
-		Errors: []error {
+		Errors: []error{
 			&CompositeError{
-				Errors: []error {
+				Errors: []error{
 					New(600, "myApiError"),
 					New(601, "MyOtherApiError"),
 				},
@@ -121,4 +121,31 @@ func TestServeError(t *testing.T) {
 	assert.Equal(t, http.StatusInternalServerError, recorder.Code)
 	assert.Equal(t, "application/json", recorder.Header().Get("content-type"))
 	assert.Equal(t, `{"code":500,"message":"Unknown error"}`, recorder.Body.String())
+}
+
+func TestAPIErrors(t *testing.T) {
+	err := New(402, "this failed %s", "test")
+	assert.Error(t, err)
+	assert.EqualValues(t, 402, err.Code())
+	assert.EqualValues(t, "this failed test", err.Error())
+
+	err = NotFound("this failed %d", 1)
+	assert.Error(t, err)
+	assert.EqualValues(t, http.StatusNotFound, err.Code())
+	assert.EqualValues(t, "this failed 1", err.Error())
+
+	err = NotFound("")
+	assert.Error(t, err)
+	assert.EqualValues(t, http.StatusNotFound, err.Code())
+	assert.EqualValues(t, "Not found", err.Error())
+
+	err = NotImplemented("not implemented")
+	assert.Error(t, err)
+	assert.EqualValues(t, http.StatusNotImplemented, err.Code())
+	assert.EqualValues(t, "not implemented", err.Error())
+
+	err = MethodNotAllowed("GET", []string{"POST", "PUT"})
+	assert.Error(t, err)
+	assert.EqualValues(t, http.StatusMethodNotAllowed, err.Code())
+	assert.EqualValues(t, "method GET is not allowed, but [POST,PUT] are", err.Error())
 }
