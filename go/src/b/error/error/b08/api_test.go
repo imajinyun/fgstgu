@@ -148,4 +148,36 @@ func TestAPIErrors(t *testing.T) {
 	assert.Error(t, err)
 	assert.EqualValues(t, http.StatusMethodNotAllowed, err.Code())
 	assert.EqualValues(t, "method GET is not allowed, but [POST,PUT] are", err.Error())
+
+	err = InvalidContentType("application/test", []string{"application/json", "application/xml"})
+	assert.Error(t, err)
+	assert.EqualValues(t, http.StatusUnsupportedMediaType, err.Code())
+	assert.EqualValues(t, "unsupported media type \"application/test\", only [application/json application/xml] are allowed", err.Error())
+
+	err = InvalidResponseFormat("application/test", []string{"application/json", "application/xml"})
+	assert.Error(t, err)
+	assert.EqualValues(t, http.StatusNotAcceptable, err.Code())
+	assert.EqualValues(t, "unsupported media type requested, only [application/json application/xml] are available", err.Error())
+}
+
+func TestValidateName(t *testing.T) {
+	v := &Validation{Name: "myValidation", message: "myMessage"}
+
+	vn := v.ValidateName("")
+	assert.EqualValues(t, "myValidation", vn.Name)
+	assert.EqualValues(t, "myMessage", vn.message)
+
+	vn = v.ValidateName("myValidateName")
+	assert.EqualValues(t, "myValidation", vn.Name)
+	assert.EqualValues(t, "myMessage", vn.message)
+
+	v.Name = ""
+
+	vn = v.ValidateName("")
+	assert.EqualValues(t, "", vn.Name)
+	assert.EqualValues(t, "myMessage", vn.message)
+
+	vn = v.ValidateName("myValidateName")
+	assert.EqualValues(t, "myValidateName", vn.Name)
+	assert.EqualValues(t, "myValidateNamemyMessage", vn.message)
 }
