@@ -1,4 +1,4 @@
-package a06
+package test
 
 import "testing"
 
