@@ -118,8 +118,53 @@ func CompositeValidationError(errors ...error) *CompositeError {
 // InvalidTypeName an error for when the type is invalid.
 func InvalidTypeName(typeName string) *Validation {
 	return &Validation{
-		code: InvalidTypeCode,
-		Value: typeName,
+		code:    InvalidTypeCode,
+		Value:   typeName,
 		message: fmt.Sprintf(invalidType, typeName),
+	}
+}
+
+// InvalidType creates an error for when the type is invalid.
+func InvalidType(name, in, typeName string, value interface{}) *Validation {
+	var message string
+	if in != "" {
+		switch value.(type) {
+		case string:
+			message = fmt.Sprintf(typeFailWithData, name, in, typeName, value)
+		case error:
+			message = fmt.Sprintf(typeFailWithError, name, in, typeName, value)
+		default:
+			message = fmt.Sprintf(typeFail, name, in, typeName)
+		}
+	} else {
+		switch value.(type) {
+		case string:
+			message = fmt.Sprintf(typeFailWithDataNoIn, name, typeName, value)
+		case error:
+			message = fmt.Sprintf(typeFailWithErrorNoIn, name, typeName, value)
+		default:
+			message = fmt.Sprintf(typeFailNoIn, name, typeName)
+		}
+	}
+	return &Validation{
+		code:    InvalidTypeCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// DuplicateItems error for when an array contains duplicates.
+func DuplicateItems(name, in string) *Validation {
+	message := fmt.Sprintf(uniqueFail, name, in)
+	if in == "" {
+		message = fmt.Sprintf(uniqueFailNoIn, name)
+	}
+	return &Validation{
+		code:    UniqueFailCode,
+		Name:    name,
+		In:      in,
+		message: message,
 	}
 }
