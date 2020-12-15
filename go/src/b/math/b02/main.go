@@ -1,3 +1,5 @@
+// [Go's work-stealing scheduler](https://rakyll.org/scheduler/)
+
 package main
 
 import (
