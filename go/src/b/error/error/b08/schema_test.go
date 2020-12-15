@@ -42,4 +42,27 @@ func TestSchemaErrors(t *testing.T) {
 	assert.Error(t, err)
 	assert.EqualValues(t, UniqueFailCode, err.Code())
 	assert.Equal(t, "uniques in query shouldn't contain duplicates", err.Error())
+
+	err = DuplicateItems("uniques", "")
+	assert.Error(t, err)
+	assert.EqualValues(t, UniqueFailCode, err.Code())
+	assert.Equal(t, "uniques shouldn't contain duplicates", err.Error())
+
+	err = TooManyItems("something", "query", 5, 8)
+	assert.Error(t, err)
+	assert.EqualValues(t, MaxItemsFailCode, err.Code())
+	assert.Equal(t, "something in query should have at most 5 items", err.Error())
+	assert.Equal(t, 8, err.Value)
+
+	err = TooManyItems("something", "", 5, 8)
+	assert.Error(t, err)
+	assert.EqualValues(t, MaxItemsFailCode, err.Code())
+	assert.Equal(t, "something should have at most 5 items", err.Error())
+	assert.Equal(t, 8, err.Value)
+
+	err = TooFewItems("something", "", 5, 3)
+	assert.Error(t, err)
+	assert.EqualValues(t, MinItemsFailCode, err.Code())
+	assert.Equal(t, "something should have at least 5 items", err.Error())
+	assert.Equal(t, 3, err.Value)
 }

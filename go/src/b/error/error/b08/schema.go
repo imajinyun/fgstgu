@@ -168,3 +168,315 @@ func DuplicateItems(name, in string) *Validation {
 		message: message,
 	}
 }
+
+// TooManyItems error for when an array contains too many items.
+func TooManyItems(name, in string, max int64, value interface{}) *Validation {
+	message := fmt.Sprintf(maxItemsFail, name, in, max)
+	if in == "" {
+		message = fmt.Sprintf(maxItemsFailNoIn, name, max)
+	}
+	return &Validation{
+		code:    MaxItemsFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// TooFewItems error for when an array contains to few items.
+func TooFewItems(name, in string, min int64, value interface{}) *Validation {
+	message := fmt.Sprintf(minItemsFail, name, in, min)
+	if in == "" {
+		message = fmt.Sprintf(minItemsFailNoIn, name, min)
+	}
+	return &Validation{
+		code:    MinItemsFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// ExceedsMaximumInt error for when maximum validation fails.
+func ExceedsMaximumInt(name, in string, max int64, exclusive bool, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		m := maxIncFailNoIn
+		if exclusive {
+			m = maxIncFailNoIn
+		}
+		message = fmt.Sprintf(m, name, max)
+	} else {
+		m := maxIncFail
+		if exclusive {
+			m = maxIncFail
+		}
+		message = fmt.Sprintf(m, name, in, max)
+	}
+	return &Validation{
+		code:    MaxFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// ExceedsMaximumUint error for when maximum validation fails.
+func ExceedsMaximumUint(name, in string, max uint64, exclusive bool, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		m := maxIncFailNoIn
+		if exclusive {
+			m = maxExcFailNoIn
+		}
+		message = fmt.Sprintf(m, name, max)
+	} else {
+		m := maxIncFail
+		if exclusive {
+			m = maxExcFail
+		}
+		message = fmt.Sprintf(m, name, in, max)
+	}
+	return &Validation{
+		code:    MaxFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// ExceedsMaximum error for when maximum validation fails.
+func ExceedsMaximum(name, in string, max float64, exclusive bool, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		m := maxIncFailNoIn
+		if exclusive {
+			m = maxExcFailNoIn
+		}
+		message = fmt.Sprintf(m, name, max)
+	} else {
+		m := maxIncFail
+		if exclusive {
+			m = maxExcFail
+		}
+		message = fmt.Sprintf(m, name, in, max)
+	}
+	return &Validation{
+		code:    MaxFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// ExceedsMinimumInt error for when minimum validation fails.
+func ExceedsMinimumInt(name, in string, min int64, exclusive bool, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		m := minIncFailNoIn
+		if exclusive {
+			m = minExcFailNoIn
+		}
+		message = fmt.Sprintf(m, name, min)
+	} else {
+		m := minIncFail
+		if exclusive {
+			m = minExcFail
+		}
+		message = fmt.Sprintf(m, name, in, min)
+	}
+	return &Validation{
+		code:    MinFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// ExceedsMinimumUint error for when minimum validation fails.
+func ExceedsMinimumUint(name, in string, min uint64, exclusive bool, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		m := minIncFailNoIn
+		if exclusive {
+			m = minExcFailNoIn
+		}
+		message = fmt.Sprintf(m, name, min)
+	} else {
+		m := minIncFail
+		if exclusive {
+			m = minExcFail
+		}
+		message = fmt.Sprintf(m, name, in, min)
+	}
+	return &Validation{
+		code:    MinFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// ExceedsMinimum error for when minimum validation fails.
+func ExceedsMinimum(name, in string, min float64, exclusive bool, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		m := minIncFailNoIn
+		if exclusive {
+			m = minExcFailNoIn
+		}
+		message = fmt.Sprintf(m, name, min)
+	} else {
+		m := minIncFail
+		if exclusive {
+			m = minExcFail
+		}
+		message = fmt.Sprintf(m, name, in, min)
+	}
+	return &Validation{
+		code:    MinFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// NotMultipleOf error for when multiple of validation fails.
+func NotMultipleOf(name, in string, multiple, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		message = fmt.Sprintf(multipleOfFailNoIn, name, multiple)
+	} else {
+		message = fmt.Sprintf(multipleOfFail, name, in, multiple)
+	}
+	return &Validation{
+		code:    MultipleOfFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// EnumFail error for when an enum validation fails.
+func EnumFail(name, in string, value interface{}, values []interface{}) *Validation {
+	var message string
+	if in == "" {
+		message = fmt.Sprintf(enumFailNoIn, name, values)
+	} else {
+		message = fmt.Sprintf(enumFail, name, in, values)
+	}
+	return &Validation{
+		code:    EnumFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		Values:  values,
+		message: message,
+	}
+}
+
+// Required error for when a value is missing.
+func Required(name, in string, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		message = fmt.Sprintf(requiredFailNoIn, name)
+	} else {
+		message = fmt.Sprintf(requiredFail, name, in)
+	}
+	return &Validation{
+		code:    RequiredFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// ReadOnly error for when a value is present in request.
+func ReadOnly(name, in string, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		message = fmt.Sprintf(readOnlyFailNoIn, name)
+	} else {
+		message = fmt.Sprintf(readOnlyFail, name, in)
+	}
+	return &Validation{
+		code:    ReadOnlyFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// TooLong error for when a string is too long.
+func TooLong(name, in string, max int64, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		message = fmt.Sprintf(tooLongMessageNoIn, name, max)
+	} else {
+		message = fmt.Sprintf(tooLongMessage, name, in, max)
+	}
+	return &Validation{
+		code:    TooLongFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// TooShort error for when a string is to short.
+func TooShort(name, in string, min int64, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		message = fmt.Sprintf(tooShortMessageNoIn, name, min)
+	} else {
+		message = fmt.Sprintf(tooShortMessage, name, in, min)
+	}
+	return &Validation{
+		code:    TooShortFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// FailedPattern error for when a string fails a regex pattern match.
+// the pattern that is returned is the ECMA syntax version of the pattern not the golang version.
+func FailedPattern(name, in, pattern string, value interface{}) *Validation {
+	var message string
+	if in == "" {
+		message = fmt.Sprintf(patternFailNoIn, name, pattern)
+	} else {
+		message = fmt.Sprintf(patternFail, name, in, pattern)
+	}
+	return &Validation{
+		code:    PatternFailCode,
+		Name:    name,
+		In:      in,
+		Value:   value,
+		message: message,
+	}
+}
+
+// MultipleOfMustBePositive error for when multipleOf factor is negative.
+func MultipleOfMustBePositive(name, in string, factor interface{}) *Validation {
+	return &Validation{
+		code:    MultipleOfMustBePositiveCode,
+		Name:    name,
+		In:      in,
+		Value:   factor,
+		message: fmt.Sprintf(multipleOfMustBePositive, name, factor),
+	}
+}
