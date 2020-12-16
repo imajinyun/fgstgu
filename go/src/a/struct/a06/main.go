@@ -1,9 +1,9 @@
 package main
 
 import (
-	"a/struct/a06/base"
-	_ "a/struct/a06/cls1"
-	_ "a/struct/a06/cls2"
+	"fgstgu/go/src/a/struct/a06/base"
+	_ "fgstgu/go/src/a/struct/a06/cls1"
+	_ "fgstgu/go/src/a/struct/a06/cls2"
 )
 
 func main() {

@@ -1,7 +1,7 @@
 package cls1
 
 import (
-	"a/struct/a06/base"
+	"fgstgu/go/src/a/struct/a06/base"
 	"fmt"
 )
 

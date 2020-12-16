@@ -17,7 +17,8 @@ func main() {
 
 	fmt.Println()
 
-	s1 := slice[1:len(slice)]
+	size := len(slice)
+	s1 := slice[1:size]
 	fmt.Println(s1)
 
 	fmt.Println()

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"a/struct/a11/calendar"
+	"fgstgu/go/src/a/struct/a07/calendar"
 	"fmt"
 	"log"
 )

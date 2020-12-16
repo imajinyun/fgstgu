@@ -5,25 +5,28 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"time"
 )
 
 const (
 	baidu = "https://baidu.com/"
 	tmall = "https://tmall.com/"
 	meitu = "https://meitu.com/"
-	tests = "https://tests.com/"
+	tests = "https://tests.com"
 )
 
 func main() {
-	go responseSize(baidu)
-	go responseSize(tmall)
-	go responseSize(meitu)
-	go responseSize(tests)
-	time.Sleep(3 * time.Second)
+	sizeChannel := make(chan int)
+	go responseSize(baidu, sizeChannel)
+	go responseSize(tmall, sizeChannel)
+	go responseSize(meitu, sizeChannel)
+	go responseSize(tests, sizeChannel)
+	fmt.Println(<-sizeChannel)
+	fmt.Println(<-sizeChannel)
+	fmt.Println(<-sizeChannel)
+	fmt.Println(<-sizeChannel)
 }
 
-func responseSize(url string) int {
+func responseSize(url string, channel chan int) {
 	fmt.Println("Getting:", url)
 	response, err := http.Get(url)
 	if err != nil {
@@ -34,6 +37,5 @@ func responseSize(url string) int {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(len(body))
-	return len(body)
+	channel <- len(body)
 }

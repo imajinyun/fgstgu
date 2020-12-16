@@ -1,4 +1,4 @@
-package a06
+package test
 
 // -> GOSSAFUNC=newSlice go build src/a/data-type/slice/a06/slice.go
 func newSlice() []int {
