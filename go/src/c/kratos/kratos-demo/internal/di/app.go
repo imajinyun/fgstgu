@@ -2,9 +2,8 @@ package di
 
 import (
 	"context"
-	"time"
-
 	"kratos-demo/internal/service"
+	"time"
 
 	"github.com/go-kratos/kratos/pkg/log"
 	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
@@ -12,12 +11,14 @@ import (
 )
 
 //go:generate kratos tool wire
+// App Struct.
 type App struct {
 	svc *service.Service
 	http *bm.Engine
 	grpc *warden.Server
 }
 
+// NewApp func.
 func NewApp(svc *service.Service, h *bm.Engine, g *warden.Server) (app *App, closeFunc func(), err error){
 	app = &App{
 		svc: svc,

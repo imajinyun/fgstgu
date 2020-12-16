@@ -1,10 +1,10 @@
 package http
 
 import (
-	"net/http"
-
 	pb "kratos-demo/api"
 	"kratos-demo/internal/model"
+	"net/http"
+
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	"github.com/go-kratos/kratos/pkg/log"
 	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
@@ -16,7 +16,7 @@ var svc pb.DemoServer
 func New(s pb.DemoServer) (engine *bm.Engine, err error) {
 	var (
 		cfg bm.ServerConfig
-		ct paladin.TOML
+		ct  paladin.TOML
 	)
 	if err = paladin.Get("http.toml").Unmarshal(&ct); err != nil {
 		return

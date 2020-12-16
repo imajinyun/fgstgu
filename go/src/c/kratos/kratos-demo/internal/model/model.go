@@ -5,6 +5,7 @@ type Kratos struct {
 	Hello string
 }
 
+// Article struct.
 type Article struct {
 	ID int64
 	Content string
