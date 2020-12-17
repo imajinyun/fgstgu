@@ -1,10 +1,11 @@
 package main
 
 import (
+	"e/lightsocks/client"
 	"e/lightsocks/cmd"
+	"fmt"
 	"log"
-
-	client "github.com/influxdata/influxdb1-client"
+	"net"
 )
 
 // DefaultListenAddr is default listen addr.
@@ -19,6 +20,16 @@ func main() {
 	config.ReadConfig()
 	config.SaveConfig()
 
-	clt, err := client.NewClient(config.Password, config.Listen)
-
+	clt, err := client.NewClient(config.Password, config.ListenAddr, config.RemoteAddr)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	log.Fatalln(clt.Listen(func(addr *net.TCPAddr) {
+		log.Println(fmt.Sprintf(`
+lightsocks-client: %s 启动成功，配置如下：
+本地监听地址：%s
+远程服务地址：%s
+密码：%s
+		`, version, addr, config.RemoteAddr, config.Password))
+	}))
 }

@@ -3,6 +3,7 @@ package client
 import (
 	"e/lightsocks"
 	"net"
+	"log"
 )
 
 // Client struct.
@@ -31,4 +32,28 @@ func NewClient(password string, laddr, raddr string) (*Client, error) {
 		ListenAddr: listenAddr,
 		RemoteAddr: remoteAddr,
 	}, nil
+}
+
+// Listen method for Client.
+func (c *Client) Listen(listen func(listenAddr *net.TCPAddr)) error {
+	return lightsocks.ListenEncryptedTCP(c.ListenAddr, c.Cipher, c.handleConn, listen)
+}
+
+func (c *Client) handleConn(conn *lightsocks.SecureTCPConn) {
+	defer conn.Close()
+
+	srv, err := lightsocks.DialEncryptedTCP(c.RemoteAddr, c.Cipher)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	defer srv.Close()
+
+	go func() {
+		if err := srv.DecodeCopy(conn); err != nil {
+			conn.Close()
+			srv.Close()
+		}
+	}()
+	conn.EncodeCopy(srv)
 }
