@@ -15,28 +15,28 @@ type Event struct {
 	Greeter Greeter
 }
 
-// Greet method for Greeter.
+// Greet returns a Greeter.
 func (g Greeter) Greet() Message {
 	return g.Message
 }
 
-// Start method for Event.
+// Start returns a Event.
 func (e Event) Start() {
 	msg := e.Greeter.Greet()
 	fmt.Println(msg)
 }
 
-// NewMessage returns Message.
+// NewMessage returns a Message.
 func NewMessage() Message {
 	return Message("🎉 Hi, VIP!")
 }
 
-// NewGreeter returns Greeter.
+// NewGreeter returns a Greeter.
 func NewGreeter(m Message) Greeter {
 	return Greeter{Message: m}
 }
 
-// NewEvent returns Event.
+// NewEvent returns a Event.
 func NewEvent(g Greeter) Event {
 	return Event{Greeter: g}
 }
