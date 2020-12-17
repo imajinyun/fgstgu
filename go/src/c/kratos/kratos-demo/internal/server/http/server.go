@@ -54,3 +54,12 @@ func howToStart(c *bm.Context) {
 	}
 	c.JSON(k, nil)
 }
+
+func articleToShow(c *bm.Context) {
+	k := &model.Article{
+		ID:      100,
+		Content: "this is a test article",
+		Author:  "kratos",
+	}
+	c.JSON(k, nil)
+}
