@@ -2,8 +2,8 @@ package client
 
 import (
 	"e/lightsocks"
-	"net"
 	"log"
+	"net"
 )
 
 // Client struct.
