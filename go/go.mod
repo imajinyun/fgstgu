@@ -14,6 +14,7 @@ require (
 	github.com/labstack/gommon v0.3.0 // indirect
 	github.com/mailru/easyjson v0.7.6
 	github.com/panjf2000/ants/v2 v2.4.3
+	github.com/pkg/profile v1.5.0
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/stretchr/testify v1.4.0
 	github.com/uniplaces/carbon v0.1.6
