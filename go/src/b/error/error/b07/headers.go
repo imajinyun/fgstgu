@@ -1,10 +1,11 @@
-package b08
+package b07
 
 import (
 	"fmt"
 	"net/http"
 )
 
+// Validation struct.
 type Validation struct {
 	code    int32
 	Name    string
