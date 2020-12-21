@@ -8,9 +8,10 @@ func main() {
 	var b *int
 	var c **int
 	a = 100
+	fmt.Println("a addr:", &a)
 	b = &a
-	fmt.Println("b addr: ", b)
+	fmt.Println("b addr:", b)
 	c = &b
-	fmt.Println("c addr: ", c)
-	fmt.Printf("a = %d, *b = %d, **c = %d\n", a, *b, **c)
+	fmt.Println("c addr:", c)
+	fmt.Printf("a=%d, *b=%d, **c=%d\n", a, *b, **c)
 }
