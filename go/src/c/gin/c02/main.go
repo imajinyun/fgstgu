@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// -> go run main.go
 func main() {
 	router := gin.Default()
 	router.Use(Cors())

@@ -46,8 +46,14 @@ func GetUser(c *gin.Context) {
 	db := InitDatabase()
 
 	var user User
-	db.First(&user)
-	c.JSON(http.StatusOK, user)
+	id := c.Params.ByName("id")
+	db.First(&user, id)
+
+	if user.ID > 0 {
+		c.JSON(http.StatusOK, user)
+	} else {
+		c.JSON(http.StatusNotFound, gin.H{"error": "user not found"})
+	}
 }
 
 // CreateUser will create a user info.
@@ -75,13 +81,13 @@ func UpdateUser(c *gin.Context) {
 	db.First(&user, id)
 
 	if user.Name != "" && user.Email != "" {
-		if user.ID >= 0 {
+		if user.ID != 0 {
 			var newUser User
 			c.Bind(&newUser)
 			result := User{
 				ID:    user.ID,
-				Name:  user.Name,
-				Email: user.Email,
+				Name:  newUser.Name,
+				Email: newUser.Email,
 			}
 			db.Save(&result)
 			c.JSON(http.StatusOK, gin.H{"success": result})
