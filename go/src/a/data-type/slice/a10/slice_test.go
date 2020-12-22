@@ -52,6 +52,15 @@ func TestListSliceElement(t *testing.T) {
 	}
 }
 
+func TestRemoveSliceElement(t *testing.T) {
+	a, b, c := 1, 2, 3
+	d := []*int{&a, &b, &c}
+	d[len(d)-1] = nil
+	d = d[:len(d)-1]
+	t.Log(a, b, c)
+	t.Log(*d[0], *d[1])
+}
+
 func TestRemoveElementFromSlice(t *testing.T) {
 	a := []int{1, 2, 3, 4, 5}
 	a = a[:len(a)-1]
