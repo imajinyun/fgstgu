@@ -16,6 +16,12 @@ func TestStrToRune(t *testing.T) {
 	t.Logf("\n%#v\n%v\n", r, r)
 }
 
+func TestRuneToStr(t *testing.T) {
+	r := []int32{20320, 22909, 71, 111}
+	s := runeToStr(r)
+	t.Logf("\n%#v\n%v\n", s, s)
+}
+
 func strToRune(s []byte) []rune {
 	var p []int32
 	for len(s) > 0 {
@@ -24,4 +30,14 @@ func strToRune(s []byte) []rune {
 		s = s[size:]
 	}
 	return []rune(p)
+}
+
+func runeToStr(b []int32) string {
+	var p []byte
+	buf := make([]byte, 3)
+	for _, r := range b {
+		n := utf8.EncodeRune(buf, r)
+		p = append(p, buf[:n]...)
+	}
+	return string(p)
 }
