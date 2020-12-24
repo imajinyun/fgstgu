@@ -22,7 +22,7 @@ func TestSingleton(t *testing.T) {
 	}
 }
 
-// Instance returns a singleton instance.
+// Instance returns a Singleton instance.
 func Instance() *Singleton {
 	if atomic.LoadUint32(&initialized) == 1 {
 		return instance
