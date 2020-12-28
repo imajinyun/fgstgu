@@ -1,0 +1,4 @@
+# ignore generated files.
+_obj
+*.a
+*.h

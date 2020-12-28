@@ -1,4 +1,5 @@
 // [Calling C code from go](https://karthikkaranth.me/blog/calling-c-code-from-go/)
+// [Calling Go Functions from Other Languages using C Shared Libraries](https://github.com/vladimirvivien/go-cshared-examples)
 
 package main
 
