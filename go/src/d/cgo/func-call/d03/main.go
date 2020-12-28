@@ -1,6 +1,6 @@
 package main
 
-//void Hello(const char* s);
+//#include <hello.h>
 import "C"
 
 // go build -o main
