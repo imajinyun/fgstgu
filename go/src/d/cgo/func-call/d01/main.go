@@ -1,3 +1,5 @@
+// [Calling C code from go](https://karthikkaranth.me/blog/calling-c-code-from-go/)
+
 package main
 
 /*
