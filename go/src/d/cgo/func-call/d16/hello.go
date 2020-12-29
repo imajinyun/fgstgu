@@ -1,5 +1,3 @@
-// -> go build -buildmode=c-archive -o hello.h hello.go
-
 package main
 
 //int sum(int a, int b);
