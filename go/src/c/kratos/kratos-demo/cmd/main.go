@@ -2,12 +2,11 @@ package main
 
 import (
 	"flag"
+	"kratos-demo/internal/di"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
-
-	"kratos-demo/internal/di"
 
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	"github.com/go-kratos/kratos/pkg/log"

@@ -2,8 +2,8 @@ package dao
 
 import (
 	"context"
-
 	"kratos-demo/internal/model"
+
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	"github.com/go-kratos/kratos/pkg/database/sql"
 )

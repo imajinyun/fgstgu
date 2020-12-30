@@ -37,6 +37,10 @@ func initRouter(e *bm.Engine) {
 	g := e.Group("/kratos-demo")
 	{
 		g.GET("/start", howToStart)
+		g.GET("/hello", helloToHandler)
+		g.GET("/param1/:name", pathParam)
+		g.GET("/param2/:name/:value/:field", pathParam)
+		g.GET("/param3/:name/*action", pathParam)
 	}
 }
 
@@ -62,4 +66,26 @@ func articleToShow(c *bm.Context) {
 		Author:  "kratos",
 	}
 	c.JSON(k, nil)
+}
+
+func helloToHandler(c *bm.Context) {
+	k := &model.Hello{
+		Message: "🎉 Hello World, Hello Go❗️",
+	}
+	c.JSON(k, nil)
+}
+
+func pathParam(c *bm.Context) {
+	name, _ := c.Params.Get("name")
+	value, _ := c.Params.Get("value")
+	field, _ := c.Params.Get("field")
+	action, _ := c.Params.Get("action")
+	path := c.RoutePath
+	c.JSONMap(map[string]interface{}{
+		"name":   name,
+		"value":  value,
+		"field":  field,
+		"action": action,
+		"path":   path,
+	}, nil)
 }
