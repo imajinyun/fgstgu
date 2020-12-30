@@ -11,6 +11,6 @@ import "unsafe"
 type CompareFunc C.qsort_cmp_func_t
 
 // Sort func.
-func Sort(base unsafe.Pointer, num, size C.size_t, cmp C.qsort_cmp_func_t) {
+func Sort(base unsafe.Pointer, num, size int, cmp CompareFunc) {
 	C.qsort(base, C.size_t(num), C.size_t(size), C.qsort_cmp_func_t(cmp))
 }

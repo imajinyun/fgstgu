@@ -9,6 +9,8 @@ static int compare(const void *a, const void *b) {
   return *pa - *pb;
 }
 
+// -> gcc -o qsort.o qsort.c
+// -> ./qsort.o
 int main(int argc, const char *argv[]) {
   int values[] = {10, 9, 1, 0, 2, 101, 98, 17, 6, 33, 78};
   int i;
