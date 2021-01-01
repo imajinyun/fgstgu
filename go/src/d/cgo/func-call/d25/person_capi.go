@@ -1,9 +1,6 @@
 package main
 
-/*
-#cgo CXXFLAGS: -std=c++17
-#include "person_capi.h"
-*/
+//#include "./person_capi.h"
 import "C"
 import "unsafe"
 
