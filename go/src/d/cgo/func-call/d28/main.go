@@ -10,6 +10,7 @@ import "fmt"
 // -> cd ./number
 // -> gcc -shared -o libnumber.so number.c
 // -> cd ../
+// -> export DYLD_LIBRARY_PATH=/path/to/fgstgu/go/src/d/cgo/func-call/d28/number
 // -> go build -o main
 // -> ./main
 func main() {
