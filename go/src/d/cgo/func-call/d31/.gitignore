@@ -1,0 +1,5 @@
+# Generated files
+*.a
+*.so
+*.o
+*.h

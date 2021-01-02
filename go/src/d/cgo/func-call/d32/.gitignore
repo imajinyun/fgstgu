@@ -1,0 +1,6 @@
+# Generated files
+*.a
+*.so
+*.o
+*.h
+*py3-config
