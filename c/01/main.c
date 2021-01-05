@@ -820,7 +820,7 @@ int main(int argc, char *argv[]) {
         exit(0);
         break;
       default:
-        printf("⚠️你的输入有误，请检查后重试！\n");
+        printf("🙏 你的输入有误，请检查后重试！\n");
         break;
     }
   }

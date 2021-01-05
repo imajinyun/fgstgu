@@ -1,9 +1,9 @@
 #include "defs.h"
-#include "type.h"
-#include "param.h"
 #include "memlayout.h"
 #include "mmu.h"
+#include "param.h"
 #include "spinlock.h"
+#include "type.h"
 
 struct {
   struct spinlock lock;
