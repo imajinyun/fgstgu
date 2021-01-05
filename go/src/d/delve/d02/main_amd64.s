@@ -8,9 +8,9 @@ GLOBL text<>(SB),NOPTR,$16
 
 // func asmHelloWorld()
 TEXT ·asmHelloWorld(SB), $16-0
-	NO_LOCAL_POINTERS
-	MOVQ $text<>+0(SB), AX
-	MOVQ AX, (SP)
-	MOVQ $16, 8(SP)
-	CALL runtime·printstring(SB)
-	RET
+    NO_LOCAL_POINTERS
+    MOVQ $text<>+0(SB), AX
+    MOVQ AX, (SP)
+    MOVQ $16, 8(SP)
+    CALL ·output(SB)
+    RET
