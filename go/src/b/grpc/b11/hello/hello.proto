@@ -1,3 +1,4 @@
+// protoc --go_out=plugins=grpc:. hello.proto
 syntax = "proto3";
 package hello;
 message String { string value = 1; }

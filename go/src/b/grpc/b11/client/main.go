@@ -9,6 +9,7 @@ import (
 	"google.golang.org/grpc"
 )
 
+// -> go run client/main.go
 func main() {
 	conn, err := grpc.Dial("localhost:1234", grpc.WithInsecure())
 	if err != nil {
