@@ -3,8 +3,6 @@ package main
 import (
 	"context"
 	"fgstgu/go/src/b/grpc/b13/api"
-	"fmt"
-	"io"
 	"log"
 
 	"google.golang.org/grpc"
@@ -18,18 +16,14 @@ func main() {
 	defer conn.Close()
 
 	client := api.NewPublishServiceClient(conn)
-	stream, err := client.SubscribeTopic(context.Background(), &api.String{Value: "golang:"})
-	if err != nil {
+	if _, err = client.Publish(
+		context.Background(),
+		&api.String{Value: "golang: hello Golang"}); err != nil {
 		log.Fatal(err)
 	}
-	for {
-		reply, err := stream.Recv()
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			log.Fatal(err)
-		}
-		fmt.Println(reply.GetValue())
+	if _, err = client.Publish(
+		context.Background(),
+		&api.String{Value: "docker: hello Docker"}); err != nil {
+		log.Fatal(err)
 	}
 }

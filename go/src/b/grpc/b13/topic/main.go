@@ -2,14 +2,11 @@ package main
 
 import (
 	"context"
+	"fgstgu/go/src/b/csp/b04/pubsub"
 	"fgstgu/go/src/b/grpc/b13/api"
-	"fgstgu/go/src/b/grpc/b13/pubsub"
-	"log"
-	"net"
+	"fmt"
 	"strings"
 	"time"
-
-	"google.golang.org/grpc"
 )
 
 // PublishService struct.
@@ -50,11 +47,31 @@ func (p *PublishService) Subscribe(arg *api.String, stream api.PublishService_Su
 }
 
 func main() {
-	grpcServer := grpc.NewServer()
-	api.RegisterPublishServiceServer(grpcServer, NewPublisherService())
-	listen, err := net.Listen("tcp", ":1234")
-	if err != nil {
-		log.Fatal(err)
-	}
-	grpcServer.Serve(listen)
+	p := pubsub.NewPublisher(100*time.Millisecond, 10)
+	golang := p.SubscribeTopic(func(v interface{}) bool {
+		if key, ok := v.(string); ok {
+			if strings.HasPrefix(key, "golang:") {
+				return true
+			}
+		}
+		return false
+	})
+
+	docker := p.SubscribeTopic(func(v interface{}) bool {
+		if key, ok := v.(string); ok {
+			if strings.HasPrefix(key, "docker:") {
+				return true
+			}
+		}
+		return false
+	})
+
+	go p.Publish("hello")
+	go p.Publish("world")
+	go p.Publish("golang: https://golang.org/")
+	go p.Publish("docker: https://www.docker.com/")
+	time.Sleep(1)
+	go func() { fmt.Println("golang topic:", <-golang) }()
+	go func() { fmt.Println("docker topic:", <-docker) }()
+	<-make(chan bool)
 }
