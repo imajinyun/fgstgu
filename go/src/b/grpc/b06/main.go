@@ -20,7 +20,7 @@ func main() {
 	if len(g.Request.FileToGenerate) == 0 {
 		g.Fatal("no files to generate")
 	}
-	g.CommandLineParameters(g.Request.GetParameters())
+	g.CommandLineParameters(g.Request.GetParameter())
 
 	// Create a wrapped version of the Descriptor and EnumDescriptors
 	// that point to the file that defines them.
