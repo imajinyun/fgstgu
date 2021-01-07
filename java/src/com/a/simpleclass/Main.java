@@ -1,4 +1,4 @@
-package org.b;
+package com.a.simpleclass;
 
 public class Main {
 
