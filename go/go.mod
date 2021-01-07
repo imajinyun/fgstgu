@@ -25,6 +25,7 @@ require (
 	github.com/panjf2000/ants/v2 v2.4.3
 	github.com/pkg/profile v1.5.0
 	github.com/smartystreets/goconvey v1.6.4
+	github.com/spaolacci/murmur3 v1.1.0
 	github.com/stretchr/testify v1.6.1
 	github.com/ugorji/go v1.2.2 // indirect
 	github.com/uniplaces/carbon v0.1.6
