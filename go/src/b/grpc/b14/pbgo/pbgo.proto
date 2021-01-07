@@ -1,0 +1,13 @@
+// protoc --go_out=plugins=grpc:. pbgo/pbgo.proto
+syntax = "proto3";
+package pbgo;
+option go_package = "gen;gen";
+import "google/protobuf/descriptor.proto";
+extend google.protobuf.MethodOptions { HttpRule rest_api = 20180715; }
+message HttpRule {
+  string get = 1;
+  string put = 2;
+  string post = 3;
+  string delete = 4;
+  string patch = 5;
+}

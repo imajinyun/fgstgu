@@ -1,0 +1,12 @@
+// protoc --go_out=plugins=grpc:. pbgo/hello.proto
+syntax = "proto3";
+package pbgo;
+option go_package = "gen;gen";
+message String { string value = 1; }
+service HelloService {
+  rpc Hello(String) returns (String) {
+    option (gen.rest_api) = {
+      get : "/hello/:value"
+    };
+  }
+}
