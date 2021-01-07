@@ -5,6 +5,8 @@ import (
 	"net/http"
 )
 
+// -> go run main.go
+// -> wrk -c 10 -d 10s -t10 http://127.0.0.1:8081/index
 func main() {
 	addr := "127.0.0.1:8081"
 	http.HandleFunc("/index", indexHandler)
