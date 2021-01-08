@@ -3,6 +3,7 @@ module fgstgu/go
 go 1.15
 
 require (
+	github.com/bwmarrin/snowflake v0.3.0 // indirect
 	github.com/chromedp/chromedp v0.5.4
 	github.com/easierway/concurrent_map v1.0.0
 	github.com/fsnotify/fsnotify v1.4.9
@@ -25,6 +26,7 @@ require (
 	github.com/panjf2000/ants/v2 v2.4.3
 	github.com/pkg/profile v1.5.0
 	github.com/smartystreets/goconvey v1.6.4
+	github.com/sony/sonyflake v1.0.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0
 	github.com/stretchr/testify v1.6.1
 	github.com/ugorji/go v1.2.2 // indirect
