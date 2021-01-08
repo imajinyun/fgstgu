@@ -10,6 +10,7 @@ require (
 	github.com/easierway/concurrent_map v1.0.0
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/gin-gonic/gin v1.6.3
+	github.com/go-co-op/gocron v0.5.0 // indirect
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/go-zookeeper/zk v1.0.2 // indirect
@@ -28,6 +29,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/panjf2000/ants/v2 v2.4.3
 	github.com/pkg/profile v1.5.0
+	github.com/robfig/cron/v3 v3.0.0 // indirect
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/sony/sonyflake v1.0.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0
