@@ -29,7 +29,7 @@ func incr() {
 
 	getResponse := client.Get(counterKey)
 	countValue, err := getResponse.Int64()
-	if err != nil {
+	if err == nil {
 		countValue++
 		setResponse := client.Set(counterKey, countValue, 0)
 		if _, err = setResponse.Result(); err != nil {
@@ -39,7 +39,7 @@ func incr() {
 	println("current counter is", countValue)
 	delResponse := client.Del(lockKey)
 	unlockSuccess, err := delResponse.Result()
-	if err != nil && unlockSuccess > 0 {
+	if err == nil && unlockSuccess > 0 {
 		println("unlock success")
 	} else {
 		println("unlock failed", err)

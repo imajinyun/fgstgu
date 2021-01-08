@@ -5,11 +5,14 @@ go 1.15
 require (
 	github.com/bwmarrin/snowflake v0.3.0 // indirect
 	github.com/chromedp/chromedp v0.5.4
+	github.com/coreos/etcd v3.3.25+incompatible // indirect
+	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/easierway/concurrent_map v1.0.0
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-sql-driver/mysql v1.5.0
+	github.com/go-zookeeper/zk v1.0.2 // indirect
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/protobuf v1.4.3
 	github.com/google/go-cmp v0.5.4 // indirect
@@ -31,6 +34,8 @@ require (
 	github.com/stretchr/testify v1.6.1
 	github.com/ugorji/go v1.2.2 // indirect
 	github.com/uniplaces/carbon v0.1.6
+	github.com/zieckey/etcdsync v0.0.0-20180810020013-cd5b26bc05a1 // indirect
+	go.etcd.io/bbolt v1.3.5 // indirect
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
 	golang.org/x/net v0.0.0-20201224014010-6772e930b67b // indirect
 	golang.org/x/sync v0.0.0-20201207232520-09787c993a3a
