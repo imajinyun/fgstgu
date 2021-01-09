@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         Supermarket supermarket = Main.initializeSupermarket();
         Scanner scanner = new Scanner(System.in);
-        while (Main.isOpen) {
+        while (isOpen) {
             Main.dumpSupermarket(supermarket);
             Customer customer = Main.initializeCustomer(supermarket);
 
