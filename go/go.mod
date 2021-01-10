@@ -3,6 +3,9 @@ module fgstgu/go
 go 1.15
 
 require (
+	github.com/PuerkitoBio/goquery v1.6.0 // indirect
+	github.com/antchfx/htmlquery v1.2.3 // indirect
+	github.com/antchfx/xmlquery v1.3.3 // indirect
 	github.com/bwmarrin/snowflake v0.3.0 // indirect
 	github.com/chromedp/chromedp v0.5.4
 	github.com/coreos/etcd v3.3.25+incompatible // indirect
@@ -14,12 +17,15 @@ require (
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/go-zookeeper/zk v1.0.2 // indirect
+	github.com/gobwas/glob v0.2.3 // indirect
+	github.com/gocolly/colly v1.2.0 // indirect
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/protobuf v1.4.3
 	github.com/google/go-cmp v0.5.4 // indirect
 	github.com/google/wire v0.4.0
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/julienschmidt/httprouter v1.3.0
+	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/gommon v0.3.0 // indirect
@@ -30,10 +36,12 @@ require (
 	github.com/panjf2000/ants/v2 v2.4.3
 	github.com/pkg/profile v1.5.0
 	github.com/robfig/cron/v3 v3.0.0 // indirect
+	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/sony/sonyflake v1.0.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0
 	github.com/stretchr/testify v1.6.1
+	github.com/temoto/robotstxt v1.1.1 // indirect
 	github.com/ugorji/go v1.2.2 // indirect
 	github.com/uniplaces/carbon v0.1.6
 	github.com/zieckey/etcdsync v0.0.0-20180810020013-cd5b26bc05a1 // indirect
