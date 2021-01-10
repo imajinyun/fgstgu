@@ -3,17 +3,18 @@
 > python3 ./20200914-导入事件04.py ./20200914事件.xlsx
 """
 
+import datetime
+import json
 # coding=utf-8
 import os
+import re
 import sys
-import json
-import datetime
-import MySQLdb
 import time
 import traceback
-import re
-from dotenv import load_dotenv
 from datetime import date
+
+import MySQLdb
+from dotenv import load_dotenv
 from xlrd import open_workbook, xldate_as_tuple
 from xlwt import Workbook
 
