@@ -1,19 +1,21 @@
+# coding=utf-8
+
 """
 > pip3 install -U mysqlclient dotenv xlrd xlwt
 > python3 ./20200914-导入节点城市2.py ./20200914-城市距离.xlsx
 """
 
-# coding=utf-8
-import os
-import sys
-import json
 import datetime
-import MySQLdb
+import json
+import os
+import re
+import sys
 import time
 import traceback
-import re
-from dotenv import load_dotenv
 from datetime import date
+
+import MySQLdb
+from dotenv import load_dotenv
 from xlrd import open_workbook, xldate_as_tuple
 from xlwt import Workbook
 
@@ -207,7 +209,8 @@ if __name__ == "__main__":
     column = ''
     ids = []
     for coin in coins:
-        column += "WHEN {} THEN {} ".format(str(coin['city_id']), str(coin['coins']))
+        column += "WHEN {} THEN {} ".format(
+            str(coin['city_id']), str(coin['coins']))
         ids.append(str(coin['city_id']))
     sql = 'UPDATE wx_walkup_city_483 SET give_coin = CASE id %s END WHERE id IN (%s)' \
         % (column, ','.join(ids))

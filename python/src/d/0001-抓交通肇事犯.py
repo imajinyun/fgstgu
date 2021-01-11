@@ -1,7 +1,9 @@
 # coding=utf-8
 
+from typing import List
 
-def get_car_number():
+
+def get_car_number() -> List[int]:
     """
     1. 问题描述：
 
@@ -29,7 +31,7 @@ def get_car_number():
                 break
             if i != j:
                 k = 1000 * i + 100 * i + 10 * j + j
-                # 车牌号为四位数，需限定范围
+                # 车牌号为四位数，需限定范围。
                 for t in range(31, 100):
                     if t * t == k:
                         res.append(k)
@@ -39,5 +41,4 @@ def get_car_number():
 
 
 if __name__ == "__main__":
-    res = get_car_number()
-    print(res)
+    print(get_car_number())
