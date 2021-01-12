@@ -7,7 +7,7 @@ print(a, sum((1, 2, 3), 10), sum([1, 2, 3], 10))
 import os
 import sys
 
-sys.path.append('..')
+sys.path.append('../..')
 
 files = os.listdir('.idea')
 
