@@ -4,6 +4,9 @@ import re
 
 
 def match_ascii(ch: str) -> bool:
+    """
+    判断 ASCII 字符。
+    """
     return re.search("^[\x00-\x7F]$", ch) is not None
 
 
