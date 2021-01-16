@@ -1,6 +1,8 @@
 # coding=utf-8
+from typing import List
 
-def rabbits_give_birth(n: int) -> int:
+
+def rabbits_give_birth(n: int) -> List[int]:
     """
     1．问题描述：
 
@@ -26,7 +28,7 @@ def rabbits_give_birth(n: int) -> int:
         return rabbits_give_birth(n - 1) + rabbits_give_birth(n - 2)
 
 
-def rabbits_give_birth2(n: int) -> int:
+def rabbits_give_birth2(n: List[int]) -> List[int]:
     # 每次计算两个，循环变量循环到原来的一半。
     res, tmp, i = 0, 1, 1
     while i <= (n // 2):
