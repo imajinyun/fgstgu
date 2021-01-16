@@ -1,8 +1,6 @@
 # coding=utf-8
-from typing import List
 
-
-def solution(a: List[int], b: List[int], c: List[int], d: List[int]) -> List[float]:
+def solution(a: int, b: int, c: int, d: int) -> float:
     """
     1. 问题描述：
 
@@ -32,10 +30,10 @@ def solution(a: List[int], b: List[int], c: List[int], d: List[int]) -> List[flo
     g. 所求 x 就是方程 ax3+bx2+cx+d=0 的根，将其输出；
     """
 
-    def f(x: List[float]) -> List[float]:
+    def f(x: float) -> float:
         return a * x * x * x + b * x * x + c * x + d
 
-    def fd(x: List[float]) -> List[float]:
+    def fd(x: float) -> float:
         return 3 * a * x * x + 2 * b * x + c
 
     x, e = 1.5, 1e-5

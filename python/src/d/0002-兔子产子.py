@@ -1,8 +1,6 @@
 # coding=utf-8
-from typing import List
 
-
-def solution(n: int) -> List[int]:
+def solution(n: int) -> int:
     """
     1．问题描述：
 
@@ -28,7 +26,7 @@ def solution(n: int) -> List[int]:
         return solution(n - 1) + solution(n - 2)
 
 
-def solution2(n: List[int]) -> List[int]:
+def solution2(n: int) -> int:
     # 每次计算两个，循环变量循环到原来的一半。
     res, tmp, i = 0, 1, 1
     while i <= (n // 2):
