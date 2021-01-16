@@ -2,7 +2,7 @@
 from typing import List
 
 
-def buy_chickens() -> List[List[int]]:
+def solution() -> List[List[int]]:
     """
     1. 问题描述：
 
@@ -32,4 +32,4 @@ def buy_chickens() -> List[List[int]]:
 
 
 if __name__ == '__main__':
-    print(buy_chickens())
+    print(solution())

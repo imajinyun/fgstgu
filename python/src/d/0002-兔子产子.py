@@ -2,7 +2,7 @@
 from typing import List
 
 
-def rabbits_give_birth(n: int) -> List[int]:
+def solution(n: int) -> List[int]:
     """
     1．问题描述：
 
@@ -25,10 +25,10 @@ def rabbits_give_birth(n: int) -> List[int]:
     if n == 1 or n == 2:
         return 1
     else:
-        return rabbits_give_birth(n - 1) + rabbits_give_birth(n - 2)
+        return solution(n - 1) + solution(n - 2)
 
 
-def rabbits_give_birth2(n: List[int]) -> List[int]:
+def solution2(n: List[int]) -> List[int]:
     # 每次计算两个，循环变量循环到原来的一半。
     res, tmp, i = 0, 1, 1
     while i <= (n // 2):
@@ -39,5 +39,5 @@ def rabbits_give_birth2(n: List[int]) -> List[int]:
 
 
 if __name__ == "__main__":
-    print(rabbits_give_birth(30))
-    print(rabbits_give_birth2(30))
+    print(solution(30))
+    print(solution2(30))

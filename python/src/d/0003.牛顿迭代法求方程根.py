@@ -2,7 +2,7 @@
 from typing import List
 
 
-def newtons_method(a: List[int], b: List[int], c: List[int], d: List[int]) -> List[float]:
+def solution(a: List[int], b: List[int], c: List[int], d: List[int]) -> List[float]:
     """
     1. 问题描述：
 
@@ -53,5 +53,5 @@ if __name__ == '__main__':
     print("请输入方程的系数：")
     a, b, c, d = map(float, input().split())
     print("输入的方程系数为：", a, b, c, d)
-    x = newtons_method(a, b, c, d)
+    x = solution(a, b, c, d)
     print("所求方程的根为 x = %.6f" % x)

@@ -3,7 +3,7 @@
 from typing import List
 
 
-def get_car_number() -> List[int]:
+def solution() -> List[int]:
     """
     1. 问题描述：
 
@@ -41,4 +41,4 @@ def get_car_number() -> List[int]:
 
 
 if __name__ == "__main__":
-    print(get_car_number())
+    print(solution())
