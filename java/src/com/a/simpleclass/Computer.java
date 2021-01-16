@@ -7,4 +7,13 @@ public class Computer {
     int count;
     double price;
 
+    @Override
+    public String toString() {
+        return "Computer{" +
+                "name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", count=" + count +
+                ", price=" + price +
+                '}';
+    }
 }
