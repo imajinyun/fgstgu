@@ -3,6 +3,15 @@ project(c C)
 
 set(CMAKE_C_STANDARD 11)
 
+# Version
+set(VERSION_MAJOR 1)
+set(VERSION_MINOR 0)
+set(VERSION_FEATURE 0)
+set(VERSION_PATCH 0)
+set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
+set(VERSION "${VERSION}.${VERSION_FEATURE}.${VERSION_PATCH}")
+message("Version: ${VERSION}")
+
 # Configure Source & Binary Directories
 set(PROJECT_ROOT "${PROJECT_SOURCE_DIR}")
 set(PROJECT_SOURCE_DIR "${PROJECT_SOURCE_DIR}/src")
@@ -12,12 +21,14 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 message("Source path: ${PROJECT_SOURCE_DIR}")
 message("Binary path: ${PROJECT_BINARY_DIR}")
 
-# Add executable for a directory
-add_executable(a.hello-world.main ${PROJECT_SOURCE_DIR}/a/hello-world/main.c)
-add_executable(a.array.a10.main ${PROJECT_SOURCE_DIR}/a/array/a10/main.c)
-add_executable(a.pointer.a01.main ${PROJECT_SOURCE_DIR}/a/pointer/a01/main.c)
-
-# Add executable for b directory
-add_executable(b.student.main ${PROJECT_SOURCE_DIR}/b/student/main.c)
-
-# Add executable for c directory
+# Add executable for all directory
+file(GLOB_RECURSE files ${PROJECT_SOURCE_DIR}/*/main*.c)
+foreach (file ${files})
+    string(REGEX REPLACE ".+/(.+)\\..*" "\\1" name ${file})
+    string(REGEX MATCH "src/(.+)/[a-z].+/" path ${file})
+    string(SUBSTRING ${path} 4 -1 path)
+    string(REPLACE "/" "." path ${path})
+    string(CONCAT out ${path} ${name})
+    add_executable(${out} ${file})
+    message(\ \ --\ ${file}\ will\ be\ compiled\ to\ ${PROJECT_BINARY_DIR}/${out})
+endforeach ()
