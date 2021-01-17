@@ -117,7 +117,7 @@ score_t *create_linked_list() {
   p1 = p2 = p3 = (score_t *) malloc(LENGTH);
   head = p3;
 
-number_label1:
+  number_label1:
   printf("请输入学生学号（学号应大于 0，输入 0 退出）：");
   scanf("%d", &p1->number);
   while (p1->number < 0) {
@@ -179,7 +179,7 @@ number_label1:
     p2 = p1;
     p1 = (score_t *) malloc(LENGTH);
 
-  number_label2:
+    number_label2:
     printf("请输入学生学号（学号应大于 0，输入 0 退出）：");
     scanf("%d", &p1->number);
     while (p1->number < 0) {
@@ -231,7 +231,7 @@ number_label1:
     }
   }
 
-finished:
+  finished:
   p1 = head;
   for (i = 1; i < n; i++) {
     for (j = i + 1; j <= n; j++) {
@@ -288,7 +288,7 @@ score_t *add(score_t *head, score_t *stu) {
   char t[10];
   stu = (score_t *) malloc(LENGTH);
 
-add_label:
+  add_label:
   printf("请输入学生学号（学号应大于 0）：");
   scanf("%d", &stu->number);
   while (stu->number < 0) {
@@ -373,7 +373,7 @@ add_label:
     p1 = head;
   }
 
-end_label:
+  end_label:
   printf("♻️目前输入的学生人数为 %d 个\n", n);
 
   return (head);
@@ -487,100 +487,103 @@ score_t *sort(score_t *head) {
   }
 
   max = p = head;
-  for (i = 0; i < LINE_LENGTH; ++i) { printf("*"); }
+  for (i = 0; i < LINE_LENGTH; ++i) {
+    printf("*");
+  }
   printf("\n1-按学生学号排序\t2-按学生姓名排序\n");
   printf("3-按语文成绩排序\t4-按数学成绩排序\n");
   printf("5-按英文成绩排序\n");
-  for (i = 0; i < LINE_LENGTH; ++i) { printf("*"); }
+  for (i = 0; i < LINE_LENGTH; ++i) {
+    printf("*");
+  }
 
   printf("\n请选择操作：");
   scanf("%d", &x);
   getchar();
   switch (x) {
-    case 1: // 按学生学号排序
-      for (i = 1; i < n; i++) {
-        for (j = i + 1; j <= n; j++) {
-          max = p;
-          p = p->next;
-          if (max->number > p->number) {
-            swap_number(max, p);
-            swap_name(max, p);
-            swap_score(max, p);
-          }
+  case 1: // 按学生学号排序
+    for (i = 1; i < n; i++) {
+      for (j = i + 1; j <= n; j++) {
+        max = p;
+        p = p->next;
+        if (max->number > p->number) {
+          swap_number(max, p);
+          swap_name(max, p);
+          swap_score(max, p);
         }
-        max = head;
-        p = head;
       }
-      dump(head);
-      break;
-    case 2: // 按学生姓名排序
-      for (i = 1; i < n; i++) {
-        for (j = i + 1; j <= n; j++) {
-          max = p;
-          p = p->next;
-          if (strcmp(max->name, p->name) > 0) {
-            swap_number(max, p);
-            swap_name(max, p);
-            swap_score(max, p);
-          }
+      max = head;
+      p = head;
+    }
+    dump(head);
+    break;
+  case 2: // 按学生姓名排序
+    for (i = 1; i < n; i++) {
+      for (j = i + 1; j <= n; j++) {
+        max = p;
+        p = p->next;
+        if (strcmp(max->name, p->name) > 0) {
+          swap_number(max, p);
+          swap_name(max, p);
+          swap_score(max, p);
         }
-        max = head;
-        p = head;
       }
-      dump(head);
-      break;
-    case 3: // 按语文成绩排序
-      for (i = 1; i < n; i++) {
-        for (j = i + 1; j <= n; j++) {
-          max = p;
-          p = p->next;
-          if (max->chinese > p->chinese) {
-            swap_number(max, p);
-            swap_name(max, p);
-            swap_score(max, p);
-          }
+      max = head;
+      p = head;
+    }
+    dump(head);
+    break;
+  case 3: // 按语文成绩排序
+    for (i = 1; i < n; i++) {
+      for (j = i + 1; j <= n; j++) {
+        max = p;
+        p = p->next;
+        if (max->chinese > p->chinese) {
+          swap_number(max, p);
+          swap_name(max, p);
+          swap_score(max, p);
         }
-        max = head;
-        p = head;
       }
-      dump(head);
-      break;
-    case 4: // 按数学成绩排序
-      for (i = 1; i < n; i++) {
-        for (j = i + 1; j <= n; j++) {
-          max = p;
-          p = p->next;
-          if (max->mathematics > p->mathematics) {
-            swap_number(max, p);
-            swap_name(max, p);
-            swap_score(max, p);
-          }
+      max = head;
+      p = head;
+    }
+    dump(head);
+    break;
+  case 4: // 按数学成绩排序
+    for (i = 1; i < n; i++) {
+      for (j = i + 1; j <= n; j++) {
+        max = p;
+        p = p->next;
+        if (max->mathematics > p->mathematics) {
+          swap_number(max, p);
+          swap_name(max, p);
+          swap_score(max, p);
         }
-        max = head;
-        p = head;
       }
-      dump(head);
-      break;
-    case 5: // 按英文成绩排序
-      for (i = 1; i < n; i++) {
-        for (j = i + 1; j <= n; j++) {
-          max = p;
-          p = p->next;
-          if (max->english > p->english) {
-            swap_number(max, p);
-            swap_name(max, p);
-            swap_score(max, p);
-          }
+      max = head;
+      p = head;
+    }
+    dump(head);
+    break;
+  case 5: // 按英文成绩排序
+    for (i = 1; i < n; i++) {
+      for (j = i + 1; j <= n; j++) {
+        max = p;
+        p = p->next;
+        if (max->english > p->english) {
+          swap_number(max, p);
+          swap_name(max, p);
+          swap_score(max, p);
         }
-        max = head;
-        p = head;
       }
-      dump(head);
-      break;
-    default:
-      printf("⚠️你的输入有误，请检查后重试！\n");
-      return 0;
-      break;
+      max = head;
+      p = head;
+    }
+    dump(head);
+    break;
+  default:printf("⚠️你的输入有误，请检查后重试！\n");
+    return 0;
+    break;
   }
 
   return (head);
@@ -690,85 +693,88 @@ score_t *statistics(score_t *head) {
   sum = avg = sum1 = sum2 = sum3 = avg1 = avg2 = avg3 = min = max = 0;
   p = head;
 
-  for (int j = 0; j < LINE_LENGTH; j++) { printf("*"); }
+  for (int j = 0; j < LINE_LENGTH; j++) {
+    printf("*");
+  }
   printf("\n1-个人总分和平均分\t2-单科平均分\t3-总分最高分和最低分\n");
-  for (int j = 0; j < LINE_LENGTH; j++) { printf("*"); }
+  for (int j = 0; j < LINE_LENGTH; j++) {
+    printf("*");
+  }
   printf("\n请输入要操作的序号：");
   scanf("%d", &x);
   getchar();
 
   switch (x) {
-    case 1:
-      if (head == NULL) {
-        printf("\n没有任何学生资料！\n");
-        return (head);
-      } else {
-        printf("--------------------------------------------------------------------------------\n");
-        printf("|学号\t|姓名\t|语文\t|数学\t|英文\t|总分\t|平均分\t|\n");
-        printf("--------------------------------------------------------------------------------\n");
-        char format[] = "|%d\t|%s\t|%.1f\t|%.1f\t|%.1f\t|%.1f\t|%1.f\t|\n";
-        while (p != NULL) {
-          sum = p->chinese + p->mathematics + p->english;
-          avg = sum / 3;
-          printf(format, p->number, p->name, p->chinese, p->mathematics, p->english, sum, avg);
-          printf("--------------------------------------------------------------------------------\n");
-          p = p->next;
-        }
-        printf("\n");
-      }
+  case 1:
+    if (head == NULL) {
+      printf("\n没有任何学生资料！\n");
       return (head);
-      break;
-    case 2:
-      if (head == NULL) {
-        printf("\n没有任何学生资料！\n");
-        return (head);
-      }
+    } else {
+      printf("--------------------------------------------------------------------------------\n");
+      printf("|学号\t|姓名\t|语文\t|数学\t|英文\t|总分\t|平均分\t|\n");
+      printf("--------------------------------------------------------------------------------\n");
+      char format[] = "|%d\t|%s\t|%.1f\t|%.1f\t|%.1f\t|%.1f\t|%1.f\t|\n";
       while (p != NULL) {
-        sum1 += p->chinese;
-        sum2 += p->mathematics;
-        sum3 += p->english;
-
-        y += 1;
-        avg1 = sum1 / y;
-        avg2 = sum2 / y;
-        avg3 = sum3 / y;
-        p = p->next;
-      }
-      printf("语文成绩平均分为：%0.1f\n", avg1);
-      printf("数学成绩平均分为：%0.1f\n", avg2);
-      printf("英文成绩平均分为：%0.1f\n", avg3);
-      printf("\n");
-      return (head);
-      break;
-    case 3:
-      if (head == NULL) {
-        printf("\n没有任何学生资料！\n");
-        return (head);
-      }
-      min = max = p->chinese + p->mathematics + p->english;
-      while (i < n) {
-        i += 1;
         sum = p->chinese + p->mathematics + p->english;
-        if (max < sum) {
-          max = sum;
-          strcpy(maxname, p->name);
-        }
-
-        if (min > sum) {
-          min = sum;
-          strcpy(minname, p->name);
-        }
-
+        avg = sum / 3;
+        printf(format, p->number, p->name, p->chinese, p->mathematics, p->english, sum, avg);
+        printf("--------------------------------------------------------------------------------\n");
         p = p->next;
       }
-      printf("总分最高分：%.1f，姓名：%s\n", max, maxname);
-      printf("总分最低分：%.1f，姓名：%s\n", min, minname);
       printf("\n");
+    }
+    return (head);
+    break;
+  case 2:
+    if (head == NULL) {
+      printf("\n没有任何学生资料！\n");
       return (head);
-      break;
-    default:
-      printf("⚠️你的输入有误，请检查后重试！\n");
-      break;
+    }
+    while (p != NULL) {
+      sum1 += p->chinese;
+      sum2 += p->mathematics;
+      sum3 += p->english;
+
+      y += 1;
+      avg1 = sum1 / y;
+      avg2 = sum2 / y;
+      avg3 = sum3 / y;
+      p = p->next;
+    }
+    printf("语文成绩平均分为：%0.1f\n", avg1);
+    printf("数学成绩平均分为：%0.1f\n", avg2);
+    printf("英文成绩平均分为：%0.1f\n", avg3);
+    printf("\n");
+    return (head);
+    break;
+  case 3:
+    if (head == NULL) {
+      printf("\n没有任何学生资料！\n");
+      return (head);
+    }
+    min = max = p->chinese + p->mathematics + p->english;
+    while (i < n) {
+      i += 1;
+      sum = p->chinese + p->mathematics + p->english;
+      if (max < sum) {
+        max = sum;
+        strcpy(maxname, p->name);
+      }
+
+      if (min > sum) {
+        min = sum;
+        strcpy(minname, p->name);
+      }
+
+      p = p->next;
+    }
+    printf("总分最高分：%.1f，姓名：%s\n", max, maxname);
+    printf("总分最低分：%.1f，姓名：%s\n", min, minname);
+    printf("\n");
+    return (head);
+    break;
+  default:printf("⚠️你的输入有误，请检查后重试！\n");
+    break;
   }
 
   return (head);
@@ -789,39 +795,38 @@ int main(int argc, char *argv[]) {
     code = menu(code);
 
     switch (code) {
-      case 1: // 创建学生成绩信息链表
-        head = create_linked_list();
-        break;
-      case 2: // 打印学生的成绩
-        dump(head);
-        break;
-      case 3: // 查询学生的成绩
-        head = search(head);
-        break;
-      case 4: // 添加学生的成绩
-        head = add(head, stu);
-        break;
-      case 5: // 删除学生的成绩
-        head = del(head);
-        break;
-      case 6: // 排序学生的成绩
-        head = sort(head);
-        break;
-      case 7: // 保存学生的成绩
-        save(head);
-        break;
-      case 8: // 统计学生的成绩
-        head = statistics(head);
-        break;
-      case 9: // 加载学生的成绩
-        head = load(head);
-        break;
-      case 0: // 退出学生成绩管理系统
-        exit(0);
-        break;
-      default:
-        printf("🙏 你的输入有误，请检查后重试！\n");
-        break;
+    case 1: // 创建学生成绩信息链表
+      head = create_linked_list();
+      break;
+    case 2: // 打印学生的成绩
+      dump(head);
+      break;
+    case 3: // 查询学生的成绩
+      head = search(head);
+      break;
+    case 4: // 添加学生的成绩
+      head = add(head, stu);
+      break;
+    case 5: // 删除学生的成绩
+      head = del(head);
+      break;
+    case 6: // 排序学生的成绩
+      head = sort(head);
+      break;
+    case 7: // 保存学生的成绩
+      save(head);
+      break;
+    case 8: // 统计学生的成绩
+      head = statistics(head);
+      break;
+    case 9: // 加载学生的成绩
+      head = load(head);
+      break;
+    case 0: // 退出学生成绩管理系统
+      exit(0);
+      break;
+    default:printf("🙏 你的输入有误，请检查后重试！\n");
+      break;
     }
   }
 
