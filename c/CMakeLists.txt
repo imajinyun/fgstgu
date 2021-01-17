@@ -15,6 +15,7 @@ message("Binary path: ${PROJECT_BINARY_DIR}")
 # Add executable for a directory
 add_executable(a.hello-world.main ${PROJECT_SOURCE_DIR}/a/hello-world/main.c)
 add_executable(a.array.a10.main ${PROJECT_SOURCE_DIR}/a/array/a10/main.c)
+add_executable(a.pointer.a01.main ${PROJECT_SOURCE_DIR}/a/pointer/a01/main.c)
 
 # Add executable for b directory
 add_executable(b.student.main ${PROJECT_SOURCE_DIR}/b/student/main.c)
