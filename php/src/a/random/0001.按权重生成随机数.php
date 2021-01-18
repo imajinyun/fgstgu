@@ -21,7 +21,7 @@ var_dump(random_by_weight($weights, 3));
 function random_by_weight(array $array, int $num): array
 {
     $ans = [];
-    if (count($array) <= 0 || $num <= 0) {
+    if (empty($array) || $num <= 0) {
         return $ans;
     }
 
