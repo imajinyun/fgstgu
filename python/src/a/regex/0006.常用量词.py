@@ -10,13 +10,13 @@ def solution() -> None:
     ? == {0,1} -> 至多出现 1 次，也可能不出现；
     """
     items = [
-        # re.search(r'^travell?er$', 'traveller') is not None,  # True
-        # re.search(r'^travell?er$', 'traveler') is not None,  # True
-        # re.search(r'^<[^>]+>$', '<body>') is not None,  # True
-        # re.search(r'^<[^>]+>$', '</table>') is not None,  # True
-        # re.search(r'^<[^>]+>$', '<>') is not None,  # False
-        # re.search(r'^\"[^\"]*\"$', "\"some\"") is not None,  # True
-        # re.search(r'^\"[^\"]*\"$', "\"\"") is not None,  # True
+        re.search(r'^travell?er$', 'traveller') is not None,  # True
+        re.search(r'^travell?er$', 'traveler') is not None,  # True
+        re.search(r'^<[^>]+>$', '<body>') is not None,  # True
+        re.search(r'^<[^>]+>$', '</table>') is not None,  # True
+        re.search(r'^<[^>]+>$', '<>') is not None,  # False
+        re.search(r'^\"[^\"]*\"$', "\"some\"") is not None,  # True
+        re.search(r'^\"[^\"]*\"$', "\"\"") is not None,  # True
 
         # 匹配 Open Tag
         re.search(r'^<[^/][^>]*>$', '<b>') is not None,  # True
