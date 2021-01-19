@@ -24,10 +24,26 @@ def solution(x: List[int], m: int) -> int:
     如果 m 的值大于中间位置上元素的值，则下一次的查找范围放在中间位置之后的元素中；
     反之，下一次的查找范围放在中间位置之前的元素中。直到 low>high，查找结束。
     """
-    index = 0
-    return index
+    low, high, index = 0, len(x) - 1, -1
+    while low <= high:
+        mid = low + (high - low) // 2
+        if m < x[mid]:
+            high = mid - 1
+        else:
+            if m > x[mid]:
+                low = mid + 1
+            else:
+                index = mid
+                break
+    return -1 if index < 0 else index
 
 
 if __name__ == '__main__':
-    x = [100, 99, 2, 0, 1, 5, 17, 33, 99, 9892, 20, 1024, 33, 89, 29, 100, 11, 23, 98, 107, 108, 2048]
-    print(solution(x))
+    x = [
+        0, 1, 2, 5, 11, 17, 20, 23, 29, 33, 33, 89, 98, 99, 99, 100, 100, 107,
+        108, 1024, 2048, 9892
+    ]
+    m = int(input("Enter your find value: "))
+    i = solution(x, m)
+    print("Index:", i)
+    print("Value:", "None" if i < 0 else x[i])

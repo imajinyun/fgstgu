@@ -27,6 +27,7 @@ def solution(item: List[int]) -> List[int]:
 
 
 if __name__ == '__main__':
+    # 100 99 2 0 1 5 17 33 99 9892 20 1024 33 89 29 100 11 23 98 107 108 2048
     print('请输入列表元素（列表末尾不要输入空格）：')
     x = input().split(' ')
     x = [int(x[v]) for _, v in enumerate(range(len(x)))]
