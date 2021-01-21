@@ -40,8 +40,7 @@ def solution() -> None:
         re.search(r'^<[^>]+>$', '<img/>') is not None,  # True
         re.search(r'^<[^>]+>$', '<p>') is not None,  # True
     ]
-    for i in range(len(items)):
-        print(items[i])
+    [print(items[i]) for i in range(len(items))]
 
 
 if __name__ == "__main__":

@@ -8,8 +8,7 @@ def solution() -> None:
         re.search(r'^\d{6}$', '100860') is not None,  # True
         re.search(r'^\d{6}$', '100A00') is not None,  # False
     ]
-    for i in range(len(items)):
-        print(items[i])
+    [print(items[i]) for i in range(len(items))]
 
 
 def solution2() -> None:
@@ -21,8 +20,7 @@ def solution2() -> None:
         re.search(regex, '123456') is not None,  # True
         re.search(regex, '1234567') is not None,  # False
     ]
-    for i in range(len(items)):
-        print(items[i])
+    [print(items[i]) for i in range(len(items))]
 
 
 def solution3() -> None:
@@ -33,8 +31,7 @@ def solution3() -> None:
         re.search(regex, '1234') is not None,  # True
         re.search(regex, '123456789') is not None,  # True
     ]
-    for i in range(len(items)):
-        print(items[i])
+    [print(items[i]) for i in range(len(items))]
 
 
 def solution4() -> None:
@@ -45,8 +42,7 @@ def solution4() -> None:
         re.search(regex, '123456') is not None,  # True
         re.search(regex, '1234567') is not None,  # False
     ]
-    for i in range(len(items)):
-        print(items[i])
+    [print(items[i]) for i in range(len(items))]
 
 
 if __name__ == "__main__":

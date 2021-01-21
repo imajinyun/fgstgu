@@ -54,8 +54,7 @@ def shorthands() -> None:
         re.search(r'^\S$', '\t') is not None,  # False
         re.search(r'^\S$', '0') is not None,  # True
     ]
-    for i in range(len(items)):
-        print(items[i])
+    [print(items[i]) for i in range(len(items))]
 
 
 if __name__ == '__main__':

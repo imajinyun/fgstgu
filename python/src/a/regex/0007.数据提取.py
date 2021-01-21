@@ -15,8 +15,7 @@ def solution() -> None:
                    "zipcode1 :100100, zipcode2:200200, zipcode3: 300300"
                    ),  # ['100100', '200200', '300300']
     ]
-    for i in range(len(items)):
-        print(items[i])
+    [print(items[i]) for i in range(len(items))]
 
 
 def solution2() -> None:

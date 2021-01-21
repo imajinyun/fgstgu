@@ -29,8 +29,7 @@ def solution() -> None:
         # "quote string"
         re.search(r'"[^"].*?"', quote_string).group(0),
     ]
-    for i in range(len(items)):
-        print(items[i])
+    [print(items[i]) for i in range(len(items))]
 
 
 if __name__ == "__main__":

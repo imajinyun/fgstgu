@@ -4,13 +4,14 @@ import re
 
 
 def negated_character_class() -> None:
+    regex = r'^[^0-9][0-9]$'
     items = [
         # 第一个匹配一个除 0~9 之外的字符，第二个匹配一个 0~9 之间的字符
-        re.search(r'^[^0-9][0-9]$', 'A8') is not None,  # True
-        re.search(r'^[^0-9][0-9]$', 'x6') is not None,  # True
-        re.search(r'^[^0-9][0-9]$', '^6') is not None,  # True
-        re.search(r'^[^0-9][0-9]$', '8') is not None,  # False
-        re.search(r'^[^0-9][0-9]$', 'A9') is not None,  # True
+        re.search(regex, 'A8') is not None,  # True
+        re.search(regex, 'x6') is not None,  # True
+        re.search(regex, '^6') is not None,  # True
+        re.search(regex, '8') is not None,  # False
+        re.search(regex, 'A9') is not None,  # True
 
         # 匹配一个 -、0、9 之外的字符
         re.search(r'^[^-09]$', '-') is not None,  # False
@@ -26,8 +27,7 @@ def negated_character_class() -> None:
         # 匹配 0、^、1、2 四个字符中的一个
         re.search(r'^[0^12]$', '^') is not None,  # True
     ]
-    for i in range(len(items)):
-        print(items[i])
+    [print(items[i]) for i in range(len(items))]
 
 
 if __name__ == '__main__':

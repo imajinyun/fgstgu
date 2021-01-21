@@ -14,8 +14,7 @@ def solution() -> None:
         re.search(r'^.*\\', b).group(0),  # C:\Program Files\Python 3.8.4\
         re.search(r'[^\\]*$', b).group(0),  # Python.exe
     ]
-    for i in range(len(items)):
-        print(items[i])
+    [print(items[i]) for i in range(len(items))]
 
 
 if __name__ == "__main__":
