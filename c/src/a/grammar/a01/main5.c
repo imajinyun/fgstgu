@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
+// 变量类型。
 int main(int argc, char *argv[]) {
   char char1 = 127;
   short short1 = pow(2, 8);
