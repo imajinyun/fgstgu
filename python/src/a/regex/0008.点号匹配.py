@@ -30,7 +30,27 @@ def solution() -> None:
         re.search(r'"[^"].*?"', quote_string).group(0),
     ]
     [print(items[i]) for i in range(len(items))]
+    print()
+
+
+def solution2() -> None:
+    regex = r'((?!\\)"|[^"])*'
+    quote_string1 = "quoted string with \"nested quote\""
+
+    # quoted string with "nested quote"
+    print(re.search(regex, quote_string1).group(0))
+
+    quote_string2 = '"escaped blackslash\\" and "another"'
+
+    # "escaped blackslash\" and "another"
+    print(re.search(regex, quote_string2).group(0))
+
+    quote_string3 = '"escaped backslash\\\"" and "another"'
+
+    # "escaped backslash\"" and "another"
+    print(re.search(regex, quote_string3).group(0))
 
 
 if __name__ == "__main__":
     solution()
+    solution2()

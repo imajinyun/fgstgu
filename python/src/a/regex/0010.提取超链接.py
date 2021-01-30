@@ -11,7 +11,9 @@ def solution() -> None:
         request.close()
 
         print("All href links:")
-        for href in re.findall(r'<a\s[\s\S]+?</a>', response):
+        # 粗略版本：r'<a\s[\s\S]+?</a>'
+        regex = r"<a(?=\s)[^>]*(?<=\s)href\s*=\s*[\"']?([^\"'\s]+)[\"']?[^>]*>([\s\S]+?)</a>"
+        for href in re.findall(regex, response):
             print(href)
 
 
