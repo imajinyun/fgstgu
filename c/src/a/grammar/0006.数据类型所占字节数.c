@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// 各数据类型所占的字节数。
+// 数据类型所占字节数。
 int main(int argc, char *argv[]) {
   printf("char is %lu bytes\n", sizeof(char)); // 1
   printf("unsigned char is %lu bytes\n", sizeof(unsigned char)); // 1
