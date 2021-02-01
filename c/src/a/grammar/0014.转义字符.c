@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main(int argc, char *argv[]) {
+int main(int argc, char const *argv[]) {
+
   puts("换行符：[\n]");
   puts("制表符：[\t]");
   puts("单引号：[\']");
@@ -8,5 +9,6 @@ int main(int argc, char *argv[]) {
   puts("反斜杠：[\\]");
 
   puts("C\nC++\tJava\n\"\'\"\\");
+
   return 0;
 }

@@ -1,8 +1,5 @@
 #include <stdio.h>
 
-/**
- * 英文字符。
- */
 int main(int argc, char *argv[]) {
   puts("实例一：");
 
@@ -14,12 +11,14 @@ int main(int argc, char *argv[]) {
   // 使用 putchar() 输出
   putchar(a);
   putchar(' ');
+
   putchar(b);
   putchar(' ');
+
   putchar(c);
   putchar(' ');
+
   putchar(d);
-  putchar(' ');
   putchar('\n');
 
   // 使用 printf() 输出
