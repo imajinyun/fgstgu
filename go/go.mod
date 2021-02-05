@@ -3,6 +3,7 @@ module fgstgu/go
 go 1.15
 
 require (
+	github.com/Gurpartap/async v0.0.0-20180927173644-4f7f499dd9ee // indirect
 	github.com/PuerkitoBio/goquery v1.6.0 // indirect
 	github.com/antchfx/htmlquery v1.2.3 // indirect
 	github.com/antchfx/xmlquery v1.3.3 // indirect
