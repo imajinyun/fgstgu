@@ -32,7 +32,7 @@ char *str_gets(char *str, int n) {
     if (str[i] == '\n') {
       str[i] = '\0';
     } else {
-      while (getchar() != '\0') { continue; }
+      while (getchar() != '\n') { continue; }
     }
   }
   return res;
