@@ -1,4 +1,4 @@
-# Go
+# The Go Programming Language
 
 ## 参考
 
