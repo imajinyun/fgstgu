@@ -21,6 +21,10 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 message("Source path: ${PROJECT_SOURCE_DIR}")
 message("Binary path: ${PROJECT_BINARY_DIR}")
 
+add_executable(a.store.extra.diceroll ${PROJECT_SOURCE_DIR}/a/store/extra/diceroll_main.c ${PROJECT_SOURCE_DIR}/a/store/extra/diceroll.c ${PROJECT_SOURCE_DIR}/a/store/extra/random.c)
+add_executable(a.store.extra.random ${PROJECT_SOURCE_DIR}/a/store/extra/random_main.c ${PROJECT_SOURCE_DIR}/a/store/extra/random.c)
+add_executable(a.store.extra.storeclass ${PROJECT_SOURCE_DIR}/a/store/extra/storeclass_main.c ${PROJECT_SOURCE_DIR}/a/store/extra/storeclass.c)
+
 # Add executable for all directory
 file(GLOB_RECURSE files "${PROJECT_SOURCE_DIR}/*/[0-9]*.c")
 foreach (file ${files})

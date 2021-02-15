@@ -18,6 +18,9 @@ int count = 0; // 文件作用域，外部链接
  *    如果未初始化，这样的变量会被设置为 0。
  * 4. 具有块作用域的变量是局部的，属于包含该声明的块私有。具有文件作用域的变量对文件（或翻译单元）中位于其声明后面的所有函数可见。
  *    具有外部链接的文件作用域变量，可用于该程序的其他翻译单元。具有内部链接的文件作用域变量，只能用于其声明所在的文件内。
+ *
+ * -> cd c/
+ * -> gcc -L/usr/local/lib ./src/a/store/storeclass_main.c ./src/a/store/storeclass.c -o build/bin/a.store.storeclass.o
  */
 int main(int argc, char *argv[]) {
   int value; // 自动变量
