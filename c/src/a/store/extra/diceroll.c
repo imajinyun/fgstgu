@@ -12,7 +12,6 @@ static int rollem(int side) {
 }
 
 int roll_n_dice(int dice, int side) {
-  int d;
   int total = 0;
   if (side < 2) {
     printf("Need at least 2 dice\n");
@@ -22,6 +21,6 @@ int roll_n_dice(int dice, int side) {
     printf("Need at least 1 die\n");
     return -1;
   }
-  for (d = 0; d < dice; d++) { total += rollem(side); }
+  for (int i = 0; i < dice; i++) { total += rollem(side); }
   return total;
 }

@@ -4,8 +4,7 @@
 #include <time.h>
 
 int main(int argc, char *argv[]) {
-  int dice, roll;
-  int side, status;
+  int dice, roll, side, status;
   srandom((unsigned int) time(0)); // 随机种子
   printf("Enter the number of sides per die (0 to stop)\n");
   while (scanf("%d", &side) == 1 && side > 0) {
@@ -14,7 +13,7 @@ int main(int argc, char *argv[]) {
       if (status == EOF) {
         break;
       } else {
-        printf("You should have entered an integer");
+        printf("You should have entered an integer\n");
         printf("Let's begin again\n");
         while (getchar() != '\n') { continue; }
         printf("How many sides (0 to stop)?\n");
@@ -26,6 +25,6 @@ int main(int argc, char *argv[]) {
     printf("How many sides (0 to stop)?\n");
   }
   printf("The rollem() function was called %d times\n", roll_count); // 使用外部变量
-  printf("Good fortune to your!\n");
+  printf("🎉 Good fortune to you!\n");
   return 0;
 }
