@@ -10,6 +10,7 @@ void append(FILE *src, FILE *dst);
 char *str_gets(char *str, int n);
 
 int main(int argc, char *argv[]) {
+  // 使用 "ab+" 和 "rb" 模式可以处理二进制文件。
   FILE *fd, *fs;    // fd 指向目标文件，fs 指向来源文件
   int files = 0;    // 追加的文件数量
   char dst[LENGTH]; // 目标文件名称
@@ -56,7 +57,9 @@ int main(int argc, char *argv[]) {
 
 void append(FILE *src, FILE *dst) {
   size_t bytes;
-  static char temp[BUFSIZE]; // 只分配一次
+  static char temp[BUFSIZE]; // 只分配一次（在编译时分配该数组，不是在每次调用 append() 函数时分配）
+
+  // 使用 fread() 和 fwrite() 一次拷贝 4096 字节，而不是一次拷贝 1 字节
   while ((bytes = fread(temp, sizeof(char), BUFSIZE, src)) > 0) { fwrite(temp, sizeof(char), bytes, dst); }
 }
 
