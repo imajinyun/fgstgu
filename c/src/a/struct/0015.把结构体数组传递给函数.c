@@ -18,6 +18,9 @@ int main(int argc, char *argv[]) {
     {"Honest Jack's Bank", 3629.88, "Party Time Savings", 2989.91},
   };
   printf("The Jhonses have a total of ￥%.2f\n", sum(fs, N));
+
+  // 因为 fs 和 &fs[0] 的地址相同，使用数组名是传递结构地址的一种间接的方法
+  printf("The Jhonses have a total of ￥%.2f\n", sum(&fs[0], N));
   return 0;
 }
 
