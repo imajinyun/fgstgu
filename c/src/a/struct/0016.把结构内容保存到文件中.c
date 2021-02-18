@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_TITLE 41
-#define MAX_AUTHOR 41
+#define MAX_TITLE 40
+#define MAX_AUTHOR 40
 #define MAX_BOOK 10
 
 char *str_gets(char *str, int n);
@@ -24,12 +24,10 @@ int main(int argc, char *argv[]) {
     fputs("Can't open book.dat file\n", stderr);
     exit(1);
   }
-  rewind(pb);
+  rewind(pb); // 定位到文件开始处
   while (count < MAX_BOOK && fread(&book[count], size, 1, pb) == 1) {
-    if (count == 0) {
-      puts("Current contents of book.dat:");
-      printf("%s by %s: ￥%.2f\n", book[count].title, book[count].author, book[count].value);
-    }
+    if (count == 0) { puts("Current contents of book.dat:"); }
+    printf("%s by %s: ￥%.2f\n", book[count].title, book[count].author, book[count].value);
     count++;
   }
   nfile = count;
