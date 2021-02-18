@@ -37,12 +37,12 @@ int main(int argc, char *argv[]) {
     fputs("The book.dat file is full\n", stderr);
     exit(2);
   }
-  puts("Please add new book titles ([enter] at the start of a line to stop)");
+  puts("Please add new book titles (press [enter] at the start of a line to stop)");
   while (count < MAX_BOOK && str_gets(book[count].title, MAX_TITLE) != NULL && book[count].title[0] != '\0') {
     puts("Now enter the author: ");
     str_gets(book[count].author, MAX_AUTHOR);
     puts("Now enter the value: ");
-    scanf("%f", &book[count].value);
+    scanf("%f", &book[count++].value);
     while (getchar() != '\n') { continue; }
     if (count < MAX_BOOK) { puts("Enter the next title"); }
   }
