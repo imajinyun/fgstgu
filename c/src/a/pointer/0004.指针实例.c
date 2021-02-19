@@ -27,8 +27,8 @@ int main(int argc, char *argv[]) {
   printf("c5 = %c\n", c5); // a
 
   printf("\n");
-  printf("num1 = %d\n", num1);  // 122
-  printf("num2 = %ld\n", num2); // 3905123744
-  printf("num3 = %ld\n", num3); // 3905123746
+  printf("num1 = %d, num2 = %c\n", num1, num1); // num1 = 122, num2 = z
+  printf("num2 = %ld\n", num2);                 // 140732824572848
+  printf("num3 = %ld\n", num3);                 // 140732824572850
   return 0;
 }
