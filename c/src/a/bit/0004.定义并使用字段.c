@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
 void show_settings(const struct box_props *bp) {
   printf("Box is %s.\n", bp->opaque == true ? "opaque" : "transparent");
   printf("The fill color is %s.\n", colors[bp->fill_color]);
-  printf("Border %s.\n", bp->show_border == true ? "shown" : "not show");
+  printf("Border %s.\n", bp->show_border == true ? "shown" : "not shown");
   printf("The border color is %s.\n", colors[bp->border_color]);
   printf("The border style is ");
   switch (bp->border_style) {
