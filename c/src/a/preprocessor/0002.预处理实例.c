@@ -8,6 +8,13 @@ tive. - Oscar Wille" /* 反斜杠把该定义延续到下一行 */
 #define PX printf("x is %d.\n", x)
 #define FMT "x is %d.\n"
 
+#define SIZE 20
+const int LENG = 50;
+static int data1[SIZE];     // 有效
+static int data2[LENG];     // 无效
+const int LENG2 = 2 * SIZE; // 有效
+const int LENG3 = 2 * LENG; // 无效
+
 /**
  * 预处理实例。
  *

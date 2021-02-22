@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int roll_count = 0; // 外部链接（源代码文件中的声明，定义式声明）
+int roll_count = 0; // 外部链接（源代码文件中的声明，定义式声明，该变量具有文件作用域）
 
 static int rollem(int side) {
   int roll;
