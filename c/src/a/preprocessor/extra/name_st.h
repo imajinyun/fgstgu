@@ -1,3 +1,6 @@
+#ifndef NAMES_H_
+#define NAMES_H_
+
 #include <string.h>
 
 #define SLEN 32
@@ -12,3 +15,5 @@ typedef struct name_st names;
 void get_names(names *);
 void show_names(const names *);
 char *str_get(char *str, int n);
+
+#endif
