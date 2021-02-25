@@ -3,9 +3,9 @@
 
 #include <stdbool.h>
 
-typedef int Item;
-
 #define MAXQUEUE 10
+
+typedef int Item;
 
 typedef struct node {
   Item item;
