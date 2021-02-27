@@ -15,6 +15,10 @@ ij_formatter_tags_enabled = false
 ij_smart_tabs = false
 ij_wrap_on_typing = false
 
+[Makefile]
+indent_size = 2
+indent_style = tab
+
 [{*.c, *.c++, *.cc, *.cp, *.cpp, *.cu, *.cuh, *.cxx, *.h, *.h++, *.hh, *.hp, *.hpp, *.hxx, *.i, *.icc, *.ii, *.inl, *.ino, *.ipp, *.m, *.mm, *.pch, *.tcc, *.tpp}]
 ij_c_add_brief_tag = false
 ij_c_add_getter_prefix = true
