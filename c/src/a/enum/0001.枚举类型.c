@@ -30,7 +30,6 @@ int main(int argc, char *argv[]) {
     default:
       puts("Error");
       exit(EXIT_FAILURE);
-      break;
   }
   return 0;
 }
