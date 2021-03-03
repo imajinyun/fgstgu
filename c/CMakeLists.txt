@@ -23,9 +23,6 @@ message("Binary path: ${PROJECT_BINARY_DIR}")
 
 add_executable(a.ds.extra.linkedlist ${PROJECT_SOURCE_DIR}/a/ds/extra/linkedlist.c ${PROJECT_SOURCE_DIR}/a/ds/extra/linkedlist.c)
 add_executable(a.ds.extra.queue ${PROJECT_SOURCE_DIR}/a/ds/extra/queue.c ${PROJECT_SOURCE_DIR}/a/ds/extra/queue.c)
-add_executable(a.store.extra.diceroll ${PROJECT_SOURCE_DIR}/a/store/extra/diceroll_main.c ${PROJECT_SOURCE_DIR}/a/store/extra/diceroll.c ${PROJECT_SOURCE_DIR}/a/store/extra/random.c)
-add_executable(a.store.extra.random ${PROJECT_SOURCE_DIR}/a/store/extra/random_main.c ${PROJECT_SOURCE_DIR}/a/store/extra/random.c)
-add_executable(a.store.extra.storeclass ${PROJECT_SOURCE_DIR}/a/store/extra/storeclass_main.c ${PROJECT_SOURCE_DIR}/a/store/extra/storeclass.c)
 add_executable(a.preprocessor.extra.name ${PROJECT_SOURCE_DIR}/a/preprocessor/extra/name_main.c ${PROJECT_SOURCE_DIR}/a/preprocessor/extra/name_st.c)
 
 # Add executable for all directory
