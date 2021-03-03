@@ -84,6 +84,12 @@ goerr:
  *
  * -> gcc -g dbg.c -O3 -o dbg
  * -> ./dbg
+ *
+ * or
+ *
+ * -> make clean
+ * -> make dbg
+ * -> ./dbg
  */
 int main(int argc, char *argv[]) {
   testDebug();
@@ -97,6 +103,7 @@ int main(int argc, char *argv[]) {
   check(testFatal(100) == -1, "failed with fatal (100)");
   check(testCheckMemory() == -1, "failed with check memory");
   check(testCheckDebug() == -1, "failed with check debug");
+  check(testCheckDebug() == 0, "failed with check debug");
   return 0;
 
 goerr:
