@@ -28,8 +28,9 @@ int main(int argc, char *argv[]) {
     printf("reverse can't open %s\n", file);
     exit(EXIT_FAILURE);
   }
-  fseek(fp, 0L, SEEK_END); // 定位到文件末尾，即把当前位置设置为距文件末尾 0 字节偏移量
-  last = ftell(fp);        // 把从文件开始处到文件结尾的字节数赋给 last
+  fseek(fp, 0L,
+        SEEK_END); // 定位到文件末尾，即把当前位置设置为距文件末尾 0 字节偏移量
+  last = ftell(fp); // 把从文件开始处到文件结尾的字节数赋给 last
 
   // 第 1 轮迭代，把程序定位到文件结尾的第 1 个字符（即，文件的最后一个字符）。
   // 然后，程序打印该字符。下一轮迭代把程序定位到前一个字符，并打印该字符。

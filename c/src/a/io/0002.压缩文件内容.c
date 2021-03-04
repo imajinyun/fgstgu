@@ -37,6 +37,8 @@ int main(int argc, char *argv[]) {
   while ((ch = getc(in)) != EOF) {
     if (count++ % 3 == 0) { putc(ch, out); }
   }
-  if (fclose(in) != 0 || fclose(out) != 0) { fprintf(stderr, "Error in closing files\n"); }
+  if (fclose(in) != 0 || fclose(out) != 0) {
+    fprintf(stderr, "Error in closing files\n");
+  }
   return 0;
 }

@@ -38,8 +38,12 @@ int main(int argc, char *argv[]) {
         continue;
       }
       append(fs, fd);
-      if (ferror(fs) != 0) { fprintf(stderr, "Error in reading file %s\n", src); }
-      if (ferror(fd) != 0) { fprintf(stderr, "Error in writing file %s\n", dst); }
+      if (ferror(fs) != 0) {
+        fprintf(stderr, "Error in reading file %s\n", src);
+      }
+      if (ferror(fd) != 0) {
+        fprintf(stderr, "Error in writing file %s\n", dst);
+      }
       fclose(fs);
       files++;
       printf("File %s appended\n", src);
@@ -57,10 +61,13 @@ int main(int argc, char *argv[]) {
 
 void append(FILE *src, FILE *dst) {
   size_t bytes;
-  static char temp[BUFSIZE]; // 只分配一次（在编译时分配该数组，不是在每次调用 append() 函数时分配）
+  static char temp
+    [BUFSIZE]; // 只分配一次（在编译时分配该数组，不是在每次调用 append() 函数时分配）
 
   // 使用 fread() 和 fwrite() 一次拷贝 4096 字节，而不是一次拷贝 1 字节
-  while ((bytes = fread(temp, sizeof(char), BUFSIZE, src)) > 0) { fwrite(temp, sizeof(char), bytes, dst); }
+  while ((bytes = fread(temp, sizeof(char), BUFSIZE, src)) > 0) {
+    fwrite(temp, sizeof(char), bytes, dst);
+  }
 }
 
 char *str_gets(char *str, int n) {

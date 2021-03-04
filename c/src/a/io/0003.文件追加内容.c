@@ -13,7 +13,9 @@ int main(int argc, char *argv[]) {
   }
   puts("Enter words to add to the file; press the #");
   puts("key at the beginning of a line to terminate");
-  while ((fscanf(stdin, "%40s", words) == 1) && (words[0] != '#')) { fprintf(fp, "%s\n", words); }
+  while ((fscanf(stdin, "%40s", words) == 1) && (words[0] != '#')) {
+    fprintf(fp, "%s\n", words);
+  }
   puts("File contents:");
   rewind(fp); // 返回到文件开始处
   while (fscanf(fp, "%s", words) == 1) { puts(words); }

@@ -3,7 +3,13 @@
 
 #define MAX_DATA 100
 
-typedef enum EyeColor { BLUE_EYES, GREEN_EYES, BROWN_EYES, BLACK_EYES, OTHER_EYES } EyeColor;
+typedef enum EyeColor {
+  BLUE_EYES,
+  GREEN_EYES,
+  BROWN_EYES,
+  BLACK_EYES,
+  OTHER_EYES
+} EyeColor;
 
 const char *EYE_COLOR_NAMES[] = {"Blue", "Green", "Brown", "Black", "Other"};
 
@@ -37,14 +43,17 @@ int main(int argc, char *argv[]) {
 
   // your eye color
   printf("What color are your eyes:\n");
-  for (i = 0; i <= OTHER_EYES; i++) { printf("%d) %s\n", i + 1, EYE_COLOR_NAMES[i]); }
+  for (i = 0; i <= OTHER_EYES; i++) {
+    printf("%d) %s\n", i + 1, EYE_COLOR_NAMES[i]);
+  }
   printf("> ");
 
   int eyes = -1;
   num = fscanf(stdin, "%d", &eyes);
   check(num > 0, "You have to enter a number");
   p.ecolor = eyes - 1;
-  check(p.ecolor <= OTHER_EYES && p.ecolor >= 0, "Do it right, that's not an option");
+  check(p.ecolor <= OTHER_EYES && p.ecolor >= 0,
+        "Do it right, that's not an option");
 
   printf("How much do you make an hour? ");
   num = fscanf(stdin, "%f", &p.income);
