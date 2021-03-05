@@ -20,23 +20,33 @@ TEST_SRC=$(willdcard tests/*_test.c)
 TESTS=$(patsubst %.c,%,$(TEST_SRC))
 
 # 最终目标是 build/lib/YOUR_LIBRARY.a，在构建时，要把名字改成你的库的名字
-TARGET=build/lib/YOUR_LIBRARY.a
+TARGET=build/lib/mylib.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 
-# The target build
+# 默认运行的目标，在没有给定目标的时候默认会运行它
 all: $(TARGET) $(SO_TARGET) tests
 
+# 用来构建开发版
 dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTIONS)
 
 dev: all
 
+# 为目标提供了仅在它下面有效的选项
 $(TARGET): CFLAGS += -fPIC
+
+# 真正的目标，首先创建 build 目录，然后编译所有的 OBJECTS
 $(TARGET): build $(OBJECTS)
+	# 1. 运行了 ar 命令，它实际上会创建一个 TARGET
+	# 2. 语法 $@ $(OBJECTS) 表示「将这个 Makefile 源文件的目标放到这里，把所有的 OBJECTS 放到它后面」
+	# 3. 这里的 $@ 对应上面的 $(TARGET)
 	ar rcs $@ $(OBJECTS)
 	ranlib $@
+
+# 要构建库，在 TARGET 上运行 ranlib，然后构建就运行了
 $(SO_TARGET): $(TARGET) $(OBJECTS)
 	$(CC) -shared -o $@ $(OBJECTS)
 
+# 仅在 build 或 bin 目录不存在时创建它们
 build:
 	@mkdir -p build
 	@mkdir -p bin
