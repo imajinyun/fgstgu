@@ -3,8 +3,13 @@
 #include <stdio.h>
 
 int message(const char *msg) {
-  printf("A string: %s\n", msg);
+  printf("You have a message: %s\n", msg);
   return 0;
+}
+
+int failure(const char *msg) {
+  printf("You have a failure: %s\n", msg);
+  return 1;
 }
 
 int uppercase(const char *msg) {
@@ -20,5 +25,3 @@ int lowercase(const char *msg) {
   printf("\n");
   return 0;
 }
-
-int failure(const char *msg) { return 1; }

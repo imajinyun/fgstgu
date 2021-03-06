@@ -1,34 +1,41 @@
 # 常用的 CFLAGS，以及一些构建库时需要的东西
-CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTIONS)
+CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
 
 # 这些选项在链接库的时候会用到，可以使用 OPTLIBS 变量来增强链接选项
-LIBS=-ldl $(OPTIONS)
+LIBS=-ldl $(OPTLIBS)
 
 # 可选参数叫 PREFIX，该参数只有在运行 Makefile 时没带 PREFIX 参数的情况下会生效
 PREFIX?=/usr/local
 
 # 动态创建了变量 SOURCES，它对 src/ 目录下所有的 ＊.c 文件做了一个通配符搜索。你需要提供 src/＊＊/＊.c 和 src/＊.c，这样 GNU make 就会把 src 及其子目录中的代码文件全部包含进去
-SOURCES=$(willdcard src/**/*.c src/*.c)
+SOURCES=$(wildcard src/**/*.c src/*.c)
+
+# 动态创建了变量 HEADERS，它对 src/ 目录下所有的 ＊.h 文件做了一个通配符搜索。你需要提供 src/＊＊/＊.h 和 src/＊.h，这样 GNU make 就会把 src 及其子目录中的代码文件全部包含进去
+HEADERS=$(wildcard src/**/*.h src/*.h)
 
 # 使用 patsubst 来获取 SOURCE 的一系列 ＊.c 文件，并制成一个所有目标文件的新列表。告诉 patsubst 将所有 %.c 扩展名都改成 %.o，然后将这些扩展名赋值到 OBJECTS 上
 OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
 
 # 再次使用通配符，找出了所有单元测试的源代码文件，这些和库的源代码文件是分开的
-TEST_SRC=$(willdcard tests/*_test.c)
+TEST_SRC=$(wildcard tests/*_test.c)
 
 # 动态获取了所有的 TEST 目标。在这里，我把 .c 扩展名全部删掉，这样整个程序就会用同样的方式命名。之前，把 .c 用 .o 取代，这样就能创建目标文件
 TESTS=$(patsubst %.c,%,$(TEST_SRC))
 
-# 最终目标是 build/lib/YOUR_LIBRARY.a，在构建时，要把名字改成你的库的名字
-TARGET=build/lib/mylib.a
+PROGRAMS_SRC=$(wildcard bin/*.c)
+PROGRAMS=$(patsubst %.c,%,$(PROGRAMS_SRC))
+
+$(TESTS): $(TARGET) $(SO_TARGET)
+
+# 最终目标是 build/YOUR_LIBRARY.a，在构建时，要把名字改成你的库的名字
+TARGET=build/mylib.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 
 # 默认运行的目标，在没有给定目标的时候默认会运行它
-all: $(TARGET) $(SO_TARGET) tests
+all: $(TARGET) $(SO_TARGET) tests $(PROGRAMS)
 
 # 用来构建开发版
-dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTIONS)
-
+dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTFLAGS)
 dev: all
 
 # 为目标提供了仅在它下面有效的选项
@@ -44,7 +51,7 @@ $(TARGET): build $(OBJECTS)
 
 # 要构建库，在 TARGET 上运行 ranlib，然后构建就运行了
 $(SO_TARGET): $(TARGET) $(OBJECTS)
-	$(CC) -shared -o $@ $(OBJECTS)
+	$(CC) $(LDFLAGS) -shared -o $@ $(OBJECTS)
 
 # 仅在 build 或 bin 目录不存在时创建它们
 build:
@@ -57,9 +64,12 @@ tests: CFLAGS += $(TARGET)
 tests: $(TESTS)
 	sh ./tests/runtests.sh
 
+valgrind:
+	VALGRIND="valgrind --log-file=/tmp/valgrind-%p.log" $(MAKE)
+
 # The cleaner
 clean:
-	rm -rf build/${OBJECTS} ${TESTS}
+	rm -rf build ${OBJECTS} ${TESTS} ${PROGRAMS}
 	rm -f tests/tests.log
 	find . -name "*.gc*" -exec rm {} \;
 	rm -rf `find . -name "*.dSYM" -print`
@@ -68,8 +78,14 @@ clean:
 install: all
 	install -d $(DESTDIR)/${PREFIX}/lib/
 	install $(TARGET) $(DESTDIR)/${PREFIX}/lib/
+	install $(SO_TARGET) $(DESTDIR)/${PREFIX}/lib
+	install -d $(DESTDIR)/${PREFIX}/include/skeleton
+	install $(HEADERS) $(DESTDIR)/${PREFIX}/include/skeleton
 
 # The checker
+BADFUNCS='[^_.>a-zA-Z0-9](str(n?cpy|n?cat|xfrm|n?dup|str|pbrk|tok|_)|stpn?cpy|a?sn?printf|byte_)'
 check:
 	@echo Files with potentially dangerous function.
-	@egrep '[^_.>a-zA-Z0-9](str(n?cpy|n?cat|xfrm|n?dup|str|pbrk|tok|_)\|stpn?cpy|a?sn?printf|byte_)' $(SOURCES) || true
+	@egrep $(BADFUNCS) $(SOURCES) || true
+
+$(PROGRAMS): CFLAGS += $(TARGET)

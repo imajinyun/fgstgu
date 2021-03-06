@@ -6,11 +6,12 @@ typedef int (*lib_function)(const char *data);
 
 /**
  * -> make
- * -> cd src
- * -> cc -c libsoc.c -o ../build/libsoc.o
- * -> cc -shared -o ../build/libsoc.so ../build/libsoc.o
- * -> cc -Wall -g -DNDEBUG libsom.c -ldl -o ../build/libsom
- * -> ../build/libsom ../build/libsoc.so message "Hello World"
+ * -> cc -c src/libso.c -o build/libso.o
+ * -> cc -shared -o build/libso.so build/libso.o
+ * -> cc -Wall -g -DNDEBUG src/main.c -ldl -o build/main
+ * -> nm build/libso.so
+ * -> ./build/main build/libso.so message "^_^ Hello World"
+ *    A string: ^_^ Hello World
  */
 int main(int argc, char *argv[]) {
   int n = 0;
