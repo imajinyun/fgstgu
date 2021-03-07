@@ -5,13 +5,21 @@
 typedef int (*lib_function)(const char *data);
 
 /**
- * -> make
+ * Manual:
+ *
+ * -> mkdir -p build
  * -> cc -c src/libso.c -o build/libso.o
  * -> cc -shared -o build/libso.so build/libso.o
  * -> cc -Wall -g -DNDEBUG src/main.c -ldl -o build/main
  * -> nm build/libso.so
  * -> ./build/main build/libso.so message "^_^ Hello World"
  *    A string: ^_^ Hello World
+ *
+ * Auto:
+ *
+ * -> make clean
+ * -> make check
+ * -> make
  */
 int main(int argc, char *argv[]) {
   int n = 0;

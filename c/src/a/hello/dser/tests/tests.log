@@ -1,0 +1,32 @@
+[🟣] (tests/list_test.c:129) 
+=== RUN:    ./tests/list_test  
+[🟣] (tests/list_test.c:119) 
+=== RUN     testListCreate  
+[🟣] (tests/list_test.c:120) 
+=== RUN     testListDestroy  
+[🟣] (tests/list_test.c:121) 
+=== RUN     testListPush  
+[🟣] (tests/list_test.c:122) 
+=== RUN     testListPop  
+[🟣] (tests/list_test.c:123) 
+=== RUN     testListUnshift  
+[🟣] (tests/list_test.c:124) 
+=== RUN     testListShift  
+[🟣] (tests/list_test.c:125) 
+=== RUN     testListRemove  
+[🟣] (tests/list_test.c:129) 
+=== RUN:    ./tests/list_test  
+[🟣] (tests/list_test.c:119) 
+=== RUN     testListCreate  
+[🟣] (tests/list_test.c:120) 
+=== RUN     testListDestroy  
+[🟣] (tests/list_test.c:121) 
+=== RUN     testListPush  
+[🟣] (tests/list_test.c:122) 
+=== RUN     testListPop  
+[🟣] (tests/list_test.c:123) 
+=== RUN     testListUnshift  
+[🟣] (tests/list_test.c:124) 
+=== RUN     testListShift  
+[🟣] (tests/list_test.c:125) 
+=== RUN     testListRemove  
