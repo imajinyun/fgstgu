@@ -1,5 +1,5 @@
-#ifndef __DBG_H__
-#define __DBG_H__
+#ifndef __DBG_H
+#define __DBG_H
 
 #include <errno.h>
 #include <stdio.h>
