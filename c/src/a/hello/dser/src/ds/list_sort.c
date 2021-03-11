@@ -15,7 +15,7 @@ int listBubbleSort(List *list, listSortCompare cmp) {
   do {
     sorted = true;
     LIST_FOREACH(list, first, next, curr) {
-      if (curr->value) {
+      if (curr->next) {
         if (cmp(curr->value, curr->next->value) > 0) {
           listNodeSwap(curr, curr->next);
           sorted = false;
@@ -26,22 +26,23 @@ int listBubbleSort(List *list, listSortCompare cmp) {
   return 0;
 }
 
-inline List *listToMerge(List *left, List *right, listSortCompare cmp) {
+List *listToMerge(List *left, List *right, listSortCompare cmp) {
   List *list = listToCreate();
   void *value = NULL;
+  int m = LIST_COUNT(left), n = LIST_COUNT(right);
 
-  while (LIST_COUNT(left) > 0 || LIST_COUNT(right) > 0) {
-    if (LIST_COUNT(left) > 0 && LIST_COUNT(right) > 0) {
+  while (m > 0 || n > 0) {
+    if (m > 0 && n > 0) {
       if (cmp(LIST_FIRST(left), LIST_FIRST(right)) <= 0) {
         value = listToShift(left);
       } else {
         value = listToShift(right);
       }
       listToPush(list, value);
-    } else if (LIST_COUNT(left) > 0) {
+    } else if (m > 0) {
       value = listToShift(left);
       listToPush(list, value);
-    } else if (LIST_COUNT(right) > 0) {
+    } else if (n > 0) {
       value = listToShift(right);
       listToPush(list, value);
     }
@@ -50,10 +51,12 @@ inline List *listToMerge(List *left, List *right, listSortCompare cmp) {
 }
 
 List *listMergeSort(List *list, listSortCompare cmp) {
-  if (LIST_COUNT(list) <= 1) { return list; }
+  int n = LIST_COUNT(list);
+  if (n <= 1) { return list; }
   List *left = listToCreate();
   List *right = listToCreate();
-  int middle = LIST_COUNT(list) / 2;
+  int middle = n / 2;
+
   LIST_FOREACH(list, first, next, curr) {
     if (middle > 0) {
       listToPush(left, curr->value);
@@ -63,10 +66,9 @@ List *listMergeSort(List *list, listSortCompare cmp) {
     middle--;
   }
 
-  List *sortedLeft = listMergeSort(left, cmp);
-  List *sortedRight = listMergeSort(right, cmp);
-  if (sortedLeft != left) { listToDestroy(left); }
-  if (sortedRight != right) { listToDestroy(right); }
-
-  return listToMerge(sortedLeft, sortedRight, cmp);
+  List *sleft = listMergeSort(left, cmp);
+  List *sright = listMergeSort(right, cmp);
+  if (sleft != left) { listToClearNode(left); }
+  if (sright != right) { listToClearNode(right); }
+  return listToMerge(sleft, sright, cmp);
 }

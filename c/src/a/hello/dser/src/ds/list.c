@@ -1,14 +1,14 @@
-#include "ds/dbg.h"
 #include "ds/list.h"
+#include "ds/dbg.h"
 
 List *listToCreate() { return calloc(1, sizeof(List)); }
 
 void listToClearNode(List *list) {
   LIST_FOREACH(list, first, next, curr) {
     if (curr->prev) { free(curr->prev); }
-    free(list->last);
-    free(list);
   }
+  free(list->last);
+  free(list);
 }
 
 void listToClearData(List *list) {
