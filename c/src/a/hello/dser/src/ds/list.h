@@ -18,6 +18,7 @@ typedef struct List {
 } List;
 
 List *listToCreate();
+void listToDumper(List *list);
 void listToClearNode(List *list);
 void listToClearData(List *list);
 void listToDestroy(List *list);

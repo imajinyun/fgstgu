@@ -14,8 +14,8 @@ List *createWords() {
   return words;
 }
 
-int isSortedList(List *words) {
-  LIST_FOREACH(words, first, next, curr) {
+int isSortedList(List *list) {
+  LIST_FOREACH(list, first, next, curr) {
     if (curr->next && strcmp(curr->value, curr->next->value) > 0) {
       debug("%s %s", (char *) curr->value, (char *) curr->next->value);
       return 0;
@@ -49,12 +49,15 @@ char *testBubbleSort() {
 
 char *testMergeSort() {
   List *words = createWords();
+
   List *l1 = listMergeSort(words, (listSortCompare) strcmp);
-  bool isSorted = isSortedList(words);
-  TestAssert(l1, "words are not sorted after merge sort");
+  bool isSorted = isSortedList(l1);
+  TestAssert(isSorted, "words are not sorted after merge sort");
 
   List *l2 = listMergeSort(l1, (listSortCompare) strcmp);
-  TestAssert(l2, "should still be sorted after merge sort");
+  isSorted = isSortedList(l2);
+  TestAssert(isSorted, "words are not sorted after merge sort");
+
   listToClearNode(l2);
   listToClearNode(l1);
   listToClearNode(words);

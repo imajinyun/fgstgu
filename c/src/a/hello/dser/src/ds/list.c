@@ -3,6 +3,10 @@
 
 List *listToCreate() { return calloc(1, sizeof(List)); }
 
+void listToDumper(List *list) {
+  LIST_FOREACH(list, first, next, curr) { info("%s", curr->value); }
+}
+
 void listToClearNode(List *list) {
   LIST_FOREACH(list, first, next, curr) {
     if (curr->prev) { free(curr->prev); }

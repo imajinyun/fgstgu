@@ -29,20 +29,19 @@ int listBubbleSort(List *list, listSortCompare cmp) {
 List *listToMerge(List *left, List *right, listSortCompare cmp) {
   List *list = listToCreate();
   void *value = NULL;
-  int m = LIST_COUNT(left), n = LIST_COUNT(right);
 
-  while (m > 0 || n > 0) {
-    if (m > 0 && n > 0) {
+  while (LIST_COUNT(left) > 0 || LIST_COUNT(right) > 0) {
+    if (LIST_COUNT(left) > 0 && LIST_COUNT(right) > 0) {
       if (cmp(LIST_FIRST(left), LIST_FIRST(right)) <= 0) {
         value = listToShift(left);
       } else {
         value = listToShift(right);
       }
       listToPush(list, value);
-    } else if (m > 0) {
+    } else if (LIST_COUNT(left) > 0) {
       value = listToShift(left);
       listToPush(list, value);
-    } else if (n > 0) {
+    } else if (LIST_COUNT(right) > 0) {
       value = listToShift(right);
       listToPush(list, value);
     }
@@ -51,17 +50,16 @@ List *listToMerge(List *left, List *right, listSortCompare cmp) {
 }
 
 List *listMergeSort(List *list, listSortCompare cmp) {
-  int n = LIST_COUNT(list);
-  if (n <= 1) { return list; }
+  if (LIST_COUNT(list) <= 1) { return list; }
   List *left = listToCreate();
   List *right = listToCreate();
-  int middle = n / 2;
+  int middle = LIST_COUNT(list) / 2;
 
-  LIST_FOREACH(list, first, next, curr) {
+  LIST_FOREACH(list, first, next, cur) {
     if (middle > 0) {
-      listToPush(left, curr->value);
+      listToPush(left, cur->value);
     } else {
-      listToPush(right, curr->value);
+      listToPush(right, cur->value);
     }
     middle--;
   }
