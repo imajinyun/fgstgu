@@ -12,6 +12,7 @@ def solution() -> None:
         re.search(r'^.$', '*') is not None,  # True
         re.search(r'^.$', '`.') is not None,  # False
         re.search(r'^.$', '11') is not None,  # False
+        re.search(r'^.$', '🍎') is not None,  # True
 
         # 换行符的匹配
         re.search(r'^.$', '\n') is not None,  # False
