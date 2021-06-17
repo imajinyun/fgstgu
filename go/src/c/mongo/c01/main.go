@@ -51,4 +51,16 @@ func main() {
 	fmt.Println(doc)
 	doc.Decode(&user)
 	log.Println(user)
+
+	objectID, err := primitive.ObjectIDFromHex("60cb4e73474c3f4451d6e567")
+	if err != nil {
+		log.Fatal(err)
+	}
+	row := collection.FindOne(context.TODO(), bson.M{"_id": objectID})
+
+	var bsonObject bson.M
+	if err := row.Decode(&bsonObject); err != nil {
+		log.Fatal(err)
+	}
+	log.Println(bsonObject)
 }

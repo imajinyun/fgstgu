@@ -17,6 +17,7 @@ type User struct {
 	UpdatedAt int64  `json:"updated_at" bson:"updated_at"`
 }
 
+// -> https://www.mongodb.com/blog/post/mongodb-go-driver-tutorial
 func main() {
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
 	client, err := mongo.NewClient(clientOptions)
